@@ -12,7 +12,7 @@
 	<artifactId>WebKid</artifactId>
 	<version>0.0.1</version>
 	<packaging>war</packaging>
-	<name>demo</name>
+	<name>CheckBox</name>
 	<description>2021년 김건웅교수님 캡스톤 프로젝트 </description>
 	<properties>
 		<java.version>16</java.version>

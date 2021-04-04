@@ -68,6 +68,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency> 
+			<groupId>org.mindrot</groupId> 
+			<artifactId>jbcrypt</artifactId> 
+			<version>0.3m</version> 
+		</dependency> <!--  Bcrypt 해시 암호화 라이브러리 -->
+		
 	</dependencies>
 
 	<build>

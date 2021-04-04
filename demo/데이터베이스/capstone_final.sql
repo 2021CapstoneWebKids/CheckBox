@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 호스트: localhost
--- 처리한 시간: 21-04-02 00:41 
+-- 처리한 시간: 21-04-05 02:22 
 -- 서버 버전: 5.1.41
 -- PHP 버전: 5.2.12
 
@@ -108,6 +108,25 @@ CREATE TABLE IF NOT EXISTS `employee_workinghours` (
 -- 테이블의 덤프 데이터 `employee_workinghours`
 --
 
+
+-- --------------------------------------------------------
+
+--
+-- 테이블 구조 `login_track`
+--
+
+CREATE TABLE IF NOT EXISTS `login_track` (
+  `User_Number` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Time` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`User_Number`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='로그인기록 테이블';
+
+--
+-- 테이블의 덤프 데이터 `login_track`
+--
+
+INSERT INTO `login_track` (`User_Number`, `Time`) VALUES
+('00001', ' 2021-04-05 02:17:35');
 
 -- --------------------------------------------------------
 
@@ -236,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `todo_weekly` (
 CREATE TABLE IF NOT EXISTS `users_identi` (
   `User_Number` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '유저번호(PK)',
   `User_ID` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '유저ID(유니크)',
-  `User_PW` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '유저PW(유니크)',
+  `User_PW` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '유저PW(유니크)',
   PRIMARY KEY (`User_Number`),
   UNIQUE KEY `User_ID` (`User_ID`,`User_PW`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='유저 아이덴티 테이블 ( 유저번호 + 유저 ID + 유저 PW )';
@@ -245,6 +264,8 @@ CREATE TABLE IF NOT EXISTS `users_identi` (
 -- 테이블의 덤프 데이터 `users_identi`
 --
 
+INSERT INTO `users_identi` (`User_Number`, `User_ID`, `User_PW`) VALUES
+('00001', 'sjot', '$2a$10$p6Z2uFkEhB2bvBT8arDq6u/VX3i25lFiCC8u1GpU2z602kBOSE3B2');
 
 -- --------------------------------------------------------
 
@@ -262,6 +283,8 @@ CREATE TABLE IF NOT EXISTS `users_isonline` (
 -- 테이블의 덤프 데이터 `users_isonline`
 --
 
+INSERT INTO `users_isonline` (`User_Number`, `inWorking`) VALUES
+('00001', 1);
 
 -- --------------------------------------------------------
 
@@ -279,6 +302,8 @@ CREATE TABLE IF NOT EXISTS `users_name` (
 -- 테이블의 덤프 데이터 `users_name`
 --
 
+INSERT INTO `users_name` (`User_Number`, `User_Name`) VALUES
+('00001', 'KangOwnTae');
 
 -- --------------------------------------------------------
 
@@ -296,6 +321,8 @@ CREATE TABLE IF NOT EXISTS `users_permission` (
 -- 테이블의 덤프 데이터 `users_permission`
 --
 
+INSERT INTO `users_permission` (`User_Number`, `User_Permission`) VALUES
+('00001', 'CEO');
 
 -- --------------------------------------------------------
 
@@ -314,6 +341,8 @@ CREATE TABLE IF NOT EXISTS `user_workplace` (
 -- 테이블의 덤프 데이터 `user_workplace`
 --
 
+INSERT INTO `user_workplace` (`User_Number`, `User_WorkPlace_Number`) VALUES
+('00001', '99999');
 
 -- --------------------------------------------------------
 
@@ -332,3 +361,5 @@ CREATE TABLE IF NOT EXISTS `workplace_list` (
 -- 테이블의 덤프 데이터 `workplace_list`
 --
 
+INSERT INTO `workplace_list` (`WorkPlace_Number`, `WorkPlace_Name`) VALUES
+('99999', '서울01');

@@ -21,6 +21,8 @@ import Security.Bcrypt;
 public class LoginController_UC1 {
 
 	SessionListener sl = new SessionListener();
+	String ID = null;
+	
 	
 	@Autowired
 	Bcrypt Bcry;
@@ -35,11 +37,11 @@ public class LoginController_UC1 {
 	}
 	
 	@RequestMapping(value = "login.do")
-	public ModelAndView Login(HttpServletRequest req , HttpServletResponse httpServletResponse) throws IOException{
+	public ModelAndView Login(HttpSession session , HttpServletRequest req , HttpServletResponse httpServletResponse) throws IOException{
 		ModelAndView mav = new ModelAndView("JSP/Login.jsp");
 		ModelAndView mav2 = new ModelAndView("JSP/Main.jsp");
 		
-		String ID = req.getParameter("ID");
+		ID = req.getParameter("ID");
 		String PW = req.getParameter("PW");
 		
 		String hash_PW = jdbc.select_hashpw(ID);
@@ -54,24 +56,22 @@ public class LoginController_UC1 {
 			System.out.println("\n" + "[SYSTEM] 아이디 : " + ID + "님이 " + time_pr + " 에 로그인 하였습니다.");
 		
 			//UC1-1-REQ-1
-			HttpSession session = req.getSession();
-			
-			session.setAttribute("User_Num" , User_Num);
-			session.setMaxInactiveInterval(1*60);
-			
-			if(sl.SessionCheck(session , User_Num)) {
-				
-				mav.addObject("fail_message", "중복된 Session을 제거했습니다. 다시 로그인 해주세요");
+			if(SessionListener.getSessionidCheck("User_Num" , User_Num)) {
+				mav.addObject("fail_message", "중복로그인이 감지되어 해당 모든 세션을 제거했습니다 다시 로그인해주세요");
 				return mav;
 			}
+			else {
+				session.setAttribute("User_Num" , User_Num);
+				session.setMaxInactiveInterval(1*60);
 		
-			System.out.println("[SYSTEM] Session Created : " + User_Num);
-			mav2.addObject("ID", ID);
-			jdbc.set_User_Online(User_Num);
-			jdbc.Insert_Login_Track(User_Num, time_pr);
+			
+				mav2.addObject("ID", ID);
+				jdbc.set_User_Online(User_Num);
+				jdbc.Insert_Login_Track(User_Num, time_pr);
 			
 			
-			return mav2;
+				return mav2;
+			}
 		}
 		else {
 			// UC1-REQ-2
@@ -84,11 +84,18 @@ public class LoginController_UC1 {
 	public ModelAndView Logout(HttpServletRequest req , HttpServletResponse httpServletResponse) throws IOException{
 		
 		ModelAndView mav = new ModelAndView("JSP/Login.jsp");
-		mav.addObject("fail_message", "로그아웃 처리 되었습니다");
-		HttpSession session = req.getSession();
-		session.invalidate();
+		String User_Num = jdbc.select_usernum(ID);
 		
-		return mav;
+		if(SessionListener.getSessionidCheck("User_Num" , User_Num)) {
+			mav.addObject("fail_message", "중복로그인이 감지되어 세션에서 제거되었습니다.");
+			HttpSession session = req.getSession();
+			session.invalidate();
+			return mav;
+		}
+		else {
+			mav.addObject("fail_message", "로그아웃 처리 되었습니다");
+			return mav;
+		}
 		
 	}
 	

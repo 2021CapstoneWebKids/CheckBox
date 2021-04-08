@@ -24,7 +24,7 @@ public class SessionListener implements HttpSessionListener{
 	@Autowired
 	private Repository_Login jdbc;
 	
-	private static final HashMap<String , HttpSession> sessions = new HashMap<>();
+	private static final Map<String , HttpSession> sessions = new ConcurrentHashMap<>();
 	
 	public static SessionListener sessionListener = null;
     
@@ -38,26 +38,37 @@ public class SessionListener implements HttpSessionListener{
     }
 	
 	
-	
-	@SuppressWarnings("unlikely-arg-type")
-	public synchronized boolean SessionCheck(HttpSession session , String User_Num) {
-		
-		if(sessions.get(session).equals(User_Num)) {
-			
-			System.out.println("Duplicated Session Checked : " + User_Num + "\n");
-			sessions.get(User_Num).invalidate();
-			sessions.remove(User_Num);
-			
-			return true;
-		}
-		else {
-			
-			return false;
-		}
-	}
-	
-	
-	
+	 //중복로그인 지우기
+	 // 중복로그인 감지시 True , 없을시 False 반환
+    public synchronized static boolean getSessionidCheck(String type,String compareId){
+        String result = "";
+        for( String key : sessions.keySet() ){
+            HttpSession value = sessions.get(key);
+            if(value != null &&  value.getAttribute(type) != null && value.getAttribute(type).toString().equals(compareId) ){
+                //System.out.println(value.getAttribute(type).toString());
+                result =  key.toString();
+            }
+        }
+        removeSessionForDoubleLogin(result);
+        
+        if(result.equals("")) {
+        	return false;
+        }
+        else {
+        	return true;
+        }
+    }
+    
+    private static void removeSessionForDoubleLogin(String userId){    	
+        
+    	
+        if(userId != null && userId.length() > 0){
+            sessions.get(userId).invalidate();
+            sessions.remove(userId);    	
+            System.out.println("\nremove userId : " + userId);
+        }
+    }
+    
 	
 	  /**
      * session.setAttribute 실행 되는 순간 같은 sessionId 일경우 1회만 실행
@@ -66,16 +77,14 @@ public class SessionListener implements HttpSessionListener{
 	@Override
     public void sessionCreated(HttpSessionEvent se) {
 		//UC1-1-REQ-1
-		User_Num = (String) se.getSession().getAttribute("User_Num");
-		
-		
-		if(se.getSession().getAttribute("User_Num")!=null) {
-			
-			sessions.put(User_Num, se.getSession());
-		}
-		
+		sessions.put(se.getSession().getId(), se.getSession());
+		System.out.println("[SYSTEM] Session Created : " + se.getSession().getAttribute("User_Num"));
     }
 
+	
+	
+	
+	
 	/**
      * session 이 소멸되는 시점에 실행, 기본 단위는 초(1분 미만은 설정할 수 없음)
      * @param httpSessionEvent
@@ -85,11 +94,14 @@ public class SessionListener implements HttpSessionListener{
     	
     	//UC1-1-REQ-2
     	User_Num = (String) se.getSession().getAttribute("User_Num");
-    	
-    	sessions.remove(User_Num);
-    	System.out.println("[SYSTEM] Session Destroyed : " + User_Num);
-    	
-    	jdbc.set_User_Offline(User_Num);
+    	if(sessions.get(se.getSession().getId()) != null) {
+    		sessions.get(se.getSession().getId()).invalidate();
+    		sessions.remove(se.getSession().getId());
+    		
+    		System.out.println("[SYSTEM] Session Destroyed : " + se.getSession().getAttribute("User_Num"));
+        	
+        	jdbc.set_User_Offline(User_Num);
+    	}
     	
     }
     

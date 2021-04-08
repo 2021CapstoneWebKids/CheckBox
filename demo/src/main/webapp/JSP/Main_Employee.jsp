@@ -163,12 +163,13 @@ height: 100%;
   </head>
   <body>
   
+  <h2 margin: 0% 0% 0% 10%;>2021년 3월 [ 직원용 메인 페이지  ]</h2>
   <div class="area">
   
   	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
 
+	
 <table>
-	<h2 margin: 0% 0% 0% 7%;> 2021년 3월</h2>
   <tr>
     <th class="day-name">Sun</th>
     <th class="day-name">Mon</th>
@@ -296,7 +297,7 @@ height: 100%;
                     </a>
                 </li>
                 <li>
-                	<a href="#">
+                	<a href="modify_info.do">
                        <i class="fa fa-info fa-2x"></i>
                         <span class="nav-text">
                             ${ID}님 으로 사용중

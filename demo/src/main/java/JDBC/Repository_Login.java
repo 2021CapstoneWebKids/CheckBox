@@ -57,4 +57,15 @@ public class Repository_Login {
 		
 		jdbcTemplate.execute(sql);
 	}
+	
+	public String select_Permission(String User_Num) {
+		
+		String sql = "Select User_Permission from users_permission where "
+				+ "User_Number = '" + User_Num + "'";
+		
+		String rs = jdbcTemplate.queryForObject(sql, String.class);
+		
+		return rs;
+		
+	}
 }

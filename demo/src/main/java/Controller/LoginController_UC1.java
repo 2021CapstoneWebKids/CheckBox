@@ -22,6 +22,7 @@ public class LoginController_UC1 {
 
 	SessionListener sl = new SessionListener();
 	String ID = null;
+	String User_Num = null;
 	
 	
 	@Autowired
@@ -39,13 +40,15 @@ public class LoginController_UC1 {
 	@RequestMapping(value = "login.do")
 	public ModelAndView Login(HttpSession session , HttpServletRequest req , HttpServletResponse httpServletResponse) throws IOException{
 		ModelAndView mav = new ModelAndView("JSP/Login.jsp");
-		ModelAndView mav2 = new ModelAndView("JSP/Main.jsp");
+		ModelAndView mav2 = new ModelAndView("JSP/Main_Employee.jsp");
+		ModelAndView mav3 = new ModelAndView("JSP/Main_CEO.jsp");
 		
 		ID = req.getParameter("ID");
 		String PW = req.getParameter("PW");
 		
 		String hash_PW = jdbc.select_hashpw(ID);
-		String User_Num = jdbc.select_usernum(ID);
+		User_Num = jdbc.select_usernum(ID);
+		String Permission = jdbc.select_Permission(User_Num);
 		
 		if(Bcry.isMatch(PW , hash_PW)){
 			// UC1-REQ-1
@@ -60,7 +63,8 @@ public class LoginController_UC1 {
 				mav.addObject("fail_message", "중복로그인이 감지되어 해당 모든 세션을 제거했습니다 다시 로그인해주세요");
 				return mav;
 			}
-			else {
+			// Employe 권한 계정 일때
+			if(Permission.equals("Employee")){
 				session.setAttribute("User_Num" , User_Num);
 				session.setMaxInactiveInterval(1*60);
 		
@@ -72,6 +76,21 @@ public class LoginController_UC1 {
 			
 				return mav2;
 			}
+			// CEO 권한 계정 일때
+			if(Permission.equals("CEO")) {
+				session.setAttribute("User_Num" , User_Num);
+				session.setMaxInactiveInterval(1*60);
+		
+			
+				mav3.addObject("ID", ID);
+				jdbc.set_User_Online(User_Num);
+				jdbc.Insert_Login_Track(User_Num, time_pr);
+			
+			
+				return mav3;
+			}
+			// 권한 NULL 예외처리
+			return mav;
 		}
 		else {
 			// UC1-REQ-2
@@ -84,26 +103,13 @@ public class LoginController_UC1 {
 	public ModelAndView Logout(HttpServletRequest req , HttpServletResponse httpServletResponse) throws IOException{
 		
 		ModelAndView mav = new ModelAndView("JSP/Login.jsp");
-		String User_Num = jdbc.select_usernum(ID);
 		
-		if(SessionListener.getSessionidCheck("User_Num" , User_Num)) {
-			mav.addObject("fail_message", "중복로그인이 감지되어 세션에서 제거되었습니다.");
-			HttpSession session = req.getSession();
-			session.invalidate();
-			return mav;
-		}
-		else {
-			mav.addObject("fail_message", "로그아웃 처리 되었습니다");
-			return mav;
+		SessionListener.getSessionidCheck("User_Num" , User_Num);
+		mav.addObject("fail_message", "로그아웃 처리 되었습니다");
+		return mav;
+		
 		}
 		
-	}
-	
-	
-	
-	
-	
-	
 	
 	
 }

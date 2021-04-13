@@ -66,6 +66,8 @@ public class LoginController_UC1 {
 			// Employe 권한 계정 일때
 			if(Permission.equals("Employee")){
 				session.setAttribute("User_Num" , User_Num);
+				session.setAttribute("ID" , ID);
+				
 				session.setMaxInactiveInterval(1*60);
 		
 			
@@ -100,7 +102,7 @@ public class LoginController_UC1 {
 	}
 	
 	@RequestMapping(value = "logout.do")
-	public ModelAndView Logout(HttpServletRequest req , HttpServletResponse httpServletResponse) throws IOException{
+	public ModelAndView Logout(HttpSession session , HttpServletRequest req , HttpServletResponse httpServletResponse) throws IOException{
 		
 		ModelAndView mav = new ModelAndView("JSP/Login.jsp");
 		

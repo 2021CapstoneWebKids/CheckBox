@@ -157,14 +157,14 @@ fieldset {
 
 
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>회원가입</title>
 </head>
 <body>
 <div class="container">  
 
-  <form id="contact" action="./login.do" method="post">
+  <form id="contact" action="./register.do" method="post">
   
-    <h3>로그인</h3>
+    <h3>회원가입</h3>
     <p align="center">${fail_message}</p>
     <fieldset>
       <input name="ID" id="ID" placeholder="아이디" type="text" tabindex="1" required autofocus>
@@ -173,9 +173,14 @@ fieldset {
       <input name="PW" id="PW" placeholder="비밀번호" type="password" tabindex="2" required>
     </fieldset>
     <fieldset>
-      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">로그인</button>
+      <input name="NAME" id="NAME" placeholder="이름" type="text" tabindex="3" required>
     </fieldset>
-    <p align="center"><a href="./Create_Account.do">계정생성 요청</p>
+    <fieldset>
+      <input name="W_NUMBER" id="W_NUMBER" placeholder="사업장번호" type="text" tabindex="4" required>
+    </fieldset>
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">회원가입 요청</button>
+    </fieldset>
       
   </form>
 </div>

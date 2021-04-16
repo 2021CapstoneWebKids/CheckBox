@@ -15,7 +15,7 @@ import Security.Bcrypt;
 @Controller
 public class InfoController_UC1 {
 
-	public static final ModelAndView ERROR = new ModelAndView("JSP/Error.jsp");
+	private static final ModelAndView ERROR = new ModelAndView("JSP/Error.jsp");
 	//중복 로그인 등으로 인해 소멸된 세션의 유저가 
 	// ~~.do 등의 데이터를 변경하려는 시도가 감지될때
 	// 유도되는 웹페이지

@@ -32,8 +32,14 @@ public class LoginController_UC1 {
 	private Repository_Login jdbc;
 	
 	@RequestMapping(value = {"/login" , "/index" , ""})
-	public ModelAndView Main_Login(HttpServletRequest req , HttpServletResponse httpServletResponse) throws IOException {
+	public ModelAndView Main_Login() throws IOException {
 		ModelAndView mav = new ModelAndView("JSP/Login.jsp");
+		return mav;
+	}
+	
+	@RequestMapping(value = "Create_Account.do")
+	public ModelAndView Create_Account() throws IOException {
+		ModelAndView mav = new ModelAndView("JSP/Register.jsp");
 		return mav;
 	}
 	

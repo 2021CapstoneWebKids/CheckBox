@@ -157,7 +157,7 @@ fieldset {
 
 
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>요청전송 완료</title>
 </head>
 <body>
 
@@ -177,29 +177,12 @@ fieldset {
 	
 <div class="container">  
 
-  <form id="contact" action="./register.do" method="post">
+  <form id="contact" method="post">
   
-    <h3>회원가입</h3>
-    <p align="center">${fail_message}</p>
-    <fieldset>
-      <input name="ID" id="ID" placeholder="아이디" type="text" tabindex="1" required autofocus>
-    </fieldset>
-    <fieldset>
-      <input name="PW" id="PW" placeholder="비밀번호" type="password" tabindex="2" required>
-    </fieldset>
-    <fieldset>
-      <input name="NAME" id="NAME" placeholder="이름" type="text" tabindex="3" required>
-    </fieldset>
-    <fieldset>
-      <input name="W_NUMBER" id="W_NUMBER" placeholder="사업장번호" type="text" tabindex="4" required>
-    </fieldset>
-    <fieldset>
-      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">회원가입 요청</button>
-    </fieldset>
-    <fieldset>
-    	<p align="center"><a href="javascript:history.back();">뒤로가기</p>
-    </fieldset>
-      
+    <h3>요청전송 완료</h3>
+    
+    <p align="center"><h4> 요청전송이 완료되었습니다. 관리자의 승인을 기다려주세요 </h4></p>
+   	
   </form>
 </div>
 

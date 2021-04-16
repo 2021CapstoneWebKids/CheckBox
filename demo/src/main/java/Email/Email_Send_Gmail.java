@@ -13,7 +13,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class Email_Send {
+public class Email_Send_Gmail {
 	
 	public void Send(String sender , String name , String masg , String sendto) throws AddressException, MessagingException {
 		

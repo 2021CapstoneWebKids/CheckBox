@@ -39,9 +39,12 @@ public class RegisterController {
 		if(jdbc.is_Exist_ID(ID)) {
 			// 중복이 있을시
 			mav.addObject("fail_message", "중복 ID입니다 다른 ID를 입력해주세요");
-			mav.addObject("PW", PW);
-			mav.addObject("NAME", NAME);
-			
+			return mav;
+		}
+		// ID특수기호 검사 TC3-2
+		if(ID.contains("@") || ID.contains("#") || ID.contains("$")){
+			// 특수기호가 포함되어있을시
+			mav.addObject("fail_message", "ID에 사용불가 특수문자가 포함되어있습니다. 다른 ID를 써주세요");
 			return mav;
 		}
 		

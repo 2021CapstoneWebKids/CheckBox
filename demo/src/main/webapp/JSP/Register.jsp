@@ -181,6 +181,9 @@ fieldset {
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">회원가입 요청</button>
     </fieldset>
+    <fieldset>
+    	<p align="center"><a href="javascript:history.back();">뒤로가기</p>
+    </fieldset>
       
   </form>
 </div>

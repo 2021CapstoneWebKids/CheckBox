@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages= {"Controller" , "Pre_Settings" ,
-		"JDBC" , "Email"})
+		"JDBC" , "Email" , "Scheduler"})
 public class MainApplication {
 
 	public static void main(String[] args) {

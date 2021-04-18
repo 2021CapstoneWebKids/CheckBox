@@ -34,6 +34,16 @@ public class Repository_Login {
 		
 	}
 	
+	public String select_userID(Object object) {
+		
+		String sql = "Select User_ID from users_identi where User_Number = '"
+				+ object + "'";
+		
+		String rs = jdbcTemplate.queryForObject(sql, String.class);
+		
+		return rs;
+	}
+	
 	public void set_User_Online(String User_Num) {
 		
 		String sql = "Update users_isonline set inWorking = 1 where "

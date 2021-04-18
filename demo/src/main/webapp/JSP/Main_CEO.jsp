@@ -163,12 +163,12 @@ height: 100%;
   </head>
   <body>
   
-  <h2 margin: 0% 0% 0% 10%;>2021년 3월 [ CEO용 메인 페이지  ]</h2>
+  
   <div class="area">
   
   	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
 
-	
+	<h2 margin: 0% 0% 0% 10%;>2021년 3월 [ CEO용 메인 페이지  ]</h2>
 <table>
   <tr>
     <th class="day-name">Sun</th>
@@ -301,6 +301,14 @@ height: 100%;
                        <i class="fa fa-info fa-2x"></i>
                         <span class="nav-text">
                             ${ID}님 으로 사용중
+                        </span>
+                    </a>
+                </li>
+                <li>
+                	<a href="withdrawal.do">
+                       <i class="fa fa-warning fa-2x"></i>
+                        <span class="nav-text">
+                                                        회원탈퇴
                         </span>
                     </a>
                 </li>

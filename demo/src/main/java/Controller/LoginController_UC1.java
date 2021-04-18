@@ -87,6 +87,8 @@ public class LoginController_UC1 {
 			// CEO 권한 계정 일때
 			if(Permission.equals("CEO")) {
 				session.setAttribute("User_Num" , User_Num);
+				session.setAttribute("ID" , ID);
+				
 				session.setMaxInactiveInterval(1*60);
 		
 			

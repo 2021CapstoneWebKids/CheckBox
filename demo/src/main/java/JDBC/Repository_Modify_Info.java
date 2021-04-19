@@ -81,4 +81,22 @@ public class Repository_Modify_Info {
 		jdbcTemplate.execute(sql);
 		
 	}
+	
+	public void delete_user(Object object) {
+	
+		String sql = "Delete t1 ,t2 ,t3 ,t4 ,t5 ,t6 "
+				+ " From users_identi AS t1"
+				+ " INNER JOIN users_name as t2 on t1.User_Number = t2.User_Number"
+				+ " INNER JOIN users_permission as t3 on t1.User_Number = t3.User_Number"
+				+ " INNER JOIN user_email as t4 on t1.User_Number = t4.User_Number"
+				+ " INNER JOIN user_workplace as t5 on t1.User_Number = t5.User_Number"
+				+ " INNER JOIN users_isonline as t6 on t1.User_Number = t6.User_Number"
+				+ " where t1.User_Number = '" + object
+				+ "'";
+		
+		jdbcTemplate.execute(sql);
+		
+		
+		
+	}
 }

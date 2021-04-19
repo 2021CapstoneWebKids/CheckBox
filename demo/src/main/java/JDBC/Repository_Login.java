@@ -23,10 +23,10 @@ public class Repository_Login {
 		
 	}
 	
-	public String select_usernum(String ID) {
+	public String select_usernum(Object object) {
 		
 		String sql = "Select User_Number from users_identi where User_ID ='"
-				+ ID + "'";
+				+ object + "'";
 		
 		String rs = jdbcTemplate.queryForObject(sql, String.class);
 		
@@ -37,6 +37,16 @@ public class Repository_Login {
 	public String select_userID(Object object) {
 		
 		String sql = "Select User_ID from users_identi where User_Number = '"
+				+ object + "'";
+		
+		String rs = jdbcTemplate.queryForObject(sql, String.class);
+		
+		return rs;
+	}
+	
+	public String select_userEmail(Object object) {
+		
+		String sql = "Select User_Email from user_email where User_Number = '"
 				+ object + "'";
 		
 		String rs = jdbcTemplate.queryForObject(sql, String.class);

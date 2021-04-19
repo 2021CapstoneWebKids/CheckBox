@@ -54,6 +54,7 @@ public class LoginController_UC1 {
 		
 		String hash_PW = jdbc.select_hashpw(ID);
 		User_Num = jdbc.select_usernum(ID);
+		String User_ID = jdbc.select_userID(User_Num);
 		String Permission = jdbc.select_Permission(User_Num);
 		
 		if(Bcry.isMatch(PW , hash_PW)){
@@ -73,6 +74,7 @@ public class LoginController_UC1 {
 			if(Permission.equals("Employee")){
 				session.setAttribute("User_Num" , User_Num);
 				session.setAttribute("ID" , ID);
+				session.setAttribute("User_ID" , User_ID);
 				
 				session.setMaxInactiveInterval(1*60);
 		

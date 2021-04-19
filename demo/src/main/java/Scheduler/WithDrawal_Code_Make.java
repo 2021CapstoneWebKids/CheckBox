@@ -30,11 +30,12 @@ public class WithDrawal_Code_Make {
 		scheduler.schedule(getRunnable() , getTrigger());
 		code = getRandomStr(5);
 		System.out.println("삭제코드 : " + code + "\n");
-		
+		System.out.println(new Date() + ",  " + ID + "계정이 삭제를 요청함");
 		
 		if(count >= 6) {
 			stopScheduler();
 			scheduler.destroy();
+			System.out.println("Scheduler Destroyed\n");
 		}
 		// scheduler.destroy();
 	}
@@ -42,7 +43,7 @@ public class WithDrawal_Code_Make {
 	private Runnable getRunnable() {
 		return () -> {
 			// 동적스케줄러 기능
-			System.out.println(new Date() + ",  " + ID + "계정이 삭제를 요청함");
+			// 트리거 주기마다 실행되는 기능코드
 		};
 	}
 	

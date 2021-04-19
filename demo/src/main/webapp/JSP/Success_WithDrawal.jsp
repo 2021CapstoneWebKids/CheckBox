@@ -157,35 +157,7 @@ fieldset {
 
 
 <meta charset="UTF-8">
-<title>회원탈퇴</title>
-
-	<script language="JavaScript">
-	
-		var SetTime = 60;		// 최초 설정 시간(기본 : 초)
-
-		function msg_time() {	// 1초씩 카운트
-			
-			m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초";	// 남은 시간 계산
-			
-			var msg = "현재 남은 시간은 <font color='red'>" + m + "</font> 입니다.";
-			
-			document.all.ViewTimer.innerHTML = msg;		// div 영역에 보여줌 
-					
-			SetTime--;					// 1초씩 감소
-			
-			if (SetTime < 0) {			// 시간이 종료 되었으면..
-				
-				clearInterval(tid);		// 타이머 해제
-				alert("시간이 만료되었습니다 재시도해주세요");
-				history.back();
-			}
-			
-		}
-
-		window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
-		
-	</script>
-
+<title>탈퇴처리 성공</title>
 </head>
 <body>
 
@@ -205,20 +177,12 @@ fieldset {
 	
 <div class="container">  
 
-  <form id="contact" action="./withdrawal_input_code.do" method="post">
+  <form id="contact">
   
-    <h3>탈퇴코드 대기중</h3>
-    <p>해당 계정 이메일로 전송된 코드를 입력해주세요</p>
-    <div id="ViewTimer"></div>
-    <p align="center">${fail_message}</p>
+    <h3>탈퇴처리 성공</h3>
+    <p>서비스를 이용해주셔서 감사합니다.</p>
     <fieldset>
-      <input name="CODE" id="CODE" placeholder="삭제요청코드" type="text" tabindex="1" required autofocus>
-    </fieldset>
-    <fieldset>
-      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">삭제코드 입력</button>
-    </fieldset>
-    <fieldset>
-    	<p align="center"><a href="javascript:history.back();">뒤로가기</a></p>
+    	<p align="center"><a href="./login">초기화면으로</a></p>
     </fieldset>
       
   </form>

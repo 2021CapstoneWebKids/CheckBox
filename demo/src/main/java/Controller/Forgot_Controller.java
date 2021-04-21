@@ -37,6 +37,12 @@ public class Forgot_Controller {
 	private String ID;
 	private String Name;
 	
+	@RequestMapping(value = "Forgot_Account.do")
+	public ModelAndView Forgot_Account() throws IOException {
+		ModelAndView mav = new ModelAndView("JSP/ForgotAccount.jsp");
+		return mav;
+	}
+	
 	@RequestMapping(value = "Forgot_try.do")
 	public ModelAndView Forgot_try(HttpServletRequest req) throws IOException, AddressException, MessagingException {
 		ModelAndView mav = new ModelAndView("JSP/ForgotAccount_Waiting.jsp");

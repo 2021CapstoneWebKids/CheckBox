@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import JDBC.Repository_Login;
+import JDBC.Repository_Server;
 import Pre_Settings.SessionListener;
 import Security.Bcrypt;
 
@@ -31,6 +32,9 @@ public class LoginController_UC1 {
 	@Autowired
 	private Repository_Login jdbc;
 	
+	@Autowired
+	private Repository_Server jdbc2;
+	
 	@RequestMapping(value = {"/login" , "/index" , ""})
 	public ModelAndView Main_Login() throws IOException {
 		ModelAndView mav = new ModelAndView("JSP/Login.jsp");
@@ -40,12 +44,6 @@ public class LoginController_UC1 {
 	@RequestMapping(value = "Create_Account.do")
 	public ModelAndView Create_Account() throws IOException {
 		ModelAndView mav = new ModelAndView("JSP/Register.jsp");
-		return mav;
-	}
-	
-	@RequestMapping(value = "Forgot_Account.do")
-	public ModelAndView Forgot_Account() throws IOException {
-		ModelAndView mav = new ModelAndView("JSP/ForgotAccount.jsp");
 		return mav;
 	}
 	
@@ -86,6 +84,7 @@ public class LoginController_UC1 {
 		
 			
 				mav2.addObject("ID", ID);
+				mav2.addObject("today"+jdbc2.Select_Today_Day() , "today");
 				jdbc.set_User_Online(User_Num);
 				jdbc.Insert_Login_Track(User_Num, time_pr);
 			

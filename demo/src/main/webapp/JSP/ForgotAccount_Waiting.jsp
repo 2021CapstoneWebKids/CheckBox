@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -157,26 +157,69 @@ fieldset {
 
 
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>복구코드 대기중</title>
+
+	<script language="JavaScript">
+	
+		var SetTime = 60;		// 최초 설정 시간(기본 : 초)
+
+		function msg_time() {	// 1초씩 카운트
+			
+			m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초";	// 남은 시간 계산
+			
+			var msg = "현재 남은 시간은 <font color='red'>" + m + "</font> 입니다.";
+			
+			document.all.ViewTimer.innerHTML = msg;		// div 영역에 보여줌 
+					
+			SetTime--;					// 1초씩 감소
+			
+			if (SetTime < 0) {			// 시간이 종료 되었으면..
+				
+				clearInterval(tid);		// 타이머 해제
+				alert("시간이 만료되었습니다 재시도해주세요");
+				history.back();
+			}
+			
+		}
+
+		window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
+		
+	</script>
+
 </head>
 <body>
+
+	<%
+ 		String strReferer = request.getHeader("referer");
+ 	
+ 		if(strReferer == null){
+		%>
+ 		<script language="javascript">
+  		alert("URL 주소창에 주소를 직접 입력해서 접근하셨습니다.\n\n정상적인 경로를 통해 다시 접근해 주십시오.");
+  		document.location.href="./Main_Login.jsp";
+ 		</script>
+		<%
+ 		 return;
+ 		}
+	%>
+	
 <div class="container">  
 
-  <form id="contact" action="./login.do" method="post">
+  <form id="contact" action="./Forgot_input_code.do" method="post">
   
-    <h3>로그인</h3>
+    <h3>복구코드 대기중</h3>
+    <p>해당 계정 이메일로 전송된 코드를 입력해주세요</p>
+    <div id="ViewTimer"></div>
     <p align="center">${fail_message}</p>
     <fieldset>
-      <input name="ID" id="ID" placeholder="아이디" type="text" tabindex="1" required autofocus>
+      <input name="CODE" id="CODE" placeholder="복구코드" type="text" tabindex="1" required autofocus>
     </fieldset>
     <fieldset>
-      <input name="PW" id="PW" placeholder="비밀번호" type="password" tabindex="2" required>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">복구코드 입력</button>
     </fieldset>
     <fieldset>
-      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">로그인</button>
+    	<p align="center"><a href="javascript:history.back();">뒤로가기</a></p>
     </fieldset>
-    <p align="center"><a href="./Create_Account.do">계정생성 요청</a></p>
-    <p align="center"><a href="./Forgot_Account.do">ID/PW 찾기</a></p>
       
   </form>
 </div>

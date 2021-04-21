@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -157,26 +157,33 @@ fieldset {
 
 
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>ID/PW 찾기</title>
 </head>
 <body>
+
+	<%
+ 		String strReferer = request.getHeader("referer");
+ 	
+ 		if(strReferer == null){
+		%>
+ 		<script language="javascript">
+  		alert("URL 주소창에 주소를 직접 입력해서 접근하셨습니다.\n\n정상적인 경로를 통해 다시 접근해 주십시오.");
+  		document.location.href="./Main_Login.jsp";
+ 		</script>
+		<%
+ 		 return;
+ 		}
+	%>
+	
 <div class="container">  
 
-  <form id="contact" action="./login.do" method="post">
+  <form id="contact">
   
-    <h3>로그인</h3>
+    <h3>비밀번호 변경 완료</h3>
     <p align="center">${fail_message}</p>
     <fieldset>
-      <input name="ID" id="ID" placeholder="아이디" type="text" tabindex="1" required autofocus>
+    	<p align="center"><a href="./login">초기화면으로</a></p>
     </fieldset>
-    <fieldset>
-      <input name="PW" id="PW" placeholder="비밀번호" type="password" tabindex="2" required>
-    </fieldset>
-    <fieldset>
-      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">로그인</button>
-    </fieldset>
-    <p align="center"><a href="./Create_Account.do">계정생성 요청</a></p>
-    <p align="center"><a href="./Forgot_Account.do">ID/PW 찾기</a></p>
       
   </form>
 </div>

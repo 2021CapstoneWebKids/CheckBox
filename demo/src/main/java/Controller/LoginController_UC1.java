@@ -43,6 +43,12 @@ public class LoginController_UC1 {
 		return mav;
 	}
 	
+	@RequestMapping(value = "Forgot_Account.do")
+	public ModelAndView Forgot_Account() throws IOException {
+		ModelAndView mav = new ModelAndView("JSP/ForgotAccount.jsp");
+		return mav;
+	}
+	
 	@RequestMapping(value = "login.do")
 	public ModelAndView Login(HttpSession session , HttpServletRequest req , HttpServletResponse httpServletResponse) throws IOException{
 		ModelAndView mav = new ModelAndView("JSP/Login.jsp");

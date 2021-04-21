@@ -29,8 +29,8 @@ public class WithDrawal_Code_Make {
 		// 동적 스케줄러 시작 부분
 		scheduler.schedule(getRunnable() , getTrigger());
 		code = getRandomStr(5);
-		System.out.println("삭제코드 : " + code + "\n");
-		System.out.println(new Date() + ",  " + ID + "계정이 삭제를 요청함");
+		System.out.println("코드 : " + code + "\n");
+		System.out.println(new Date() + ",  " + ID + "계정이 코드를 요청함");
 		
 		if(count >= 6) {
 			stopScheduler();

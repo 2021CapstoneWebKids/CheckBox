@@ -159,26 +159,25 @@ height: 100%;
 
 	span.event-ghost { background-color:transparent; }
  	
+
  	</style>
+ 	
+ 		<script language="javascript">
+ 			function time(){
+  				var time= new Date(); //시간받기위해서 new date
+     			document.getElementById("now").innerHTML=time.getHours()+"시"+time.getMinutes()+"분"+time.getSeconds()+"초";
+     			setInterval("time()",1000);     //1초 지난후 time()실행
+  			}
+      	</script>
   </head>
-  <body>
+  <body onload="time()">
   
-  <h2 margin: 0% 0% 0% 10%;>2021년 3월 [ 직원용 메인 페이지  ]</h2>
   <div class="area">
   
   	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
 
 	
 <table>
-  <tr>
-    <th class="day-name">Sun</th>
-    <th class="day-name">Mon</th>
-    <th class="day-name">Tue</th>
-    <th class="day-name">Wed</th>
-    <th class="day-name">Thu</th>
-    <th class="day-name">Fri</th>
-    <th class="day-name">Sat</th>
-  </tr>
   <tr>
     <td class="day ${today1}"><span class="number">1</span><span class="event"></span><span class="event"></span></td>
     <td class="day ${today2}"><span class="number">2</span></td>
@@ -219,9 +218,11 @@ height: 100%;
     <td class="day ${today29}"><span class="number">29</span><span class="event event-multiday-finish" style="background-color:#da5f5f;"></td>
     <td class="day ${today30}"><span class="number">30</span></td>
     <td class="day ${today31}"><span class="number">31</span></td>
+  	<td>${year}년 ${month}월</td>
+  	<td><button type="button" onclick="location.href='./CheckIn.do'">출근</button></td>
+  	<td><button type="button" onclick="location.href='./CheckOut.do'">퇴근</button></td>
   </tr>
 </table>
-  
   
   </div>
   

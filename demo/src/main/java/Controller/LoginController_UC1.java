@@ -80,7 +80,7 @@ public class LoginController_UC1 {
 				session.setAttribute("ID" , ID);
 				session.setAttribute("User_ID" , User_ID);
 				
-				session.setMaxInactiveInterval(1*60);
+				session.setMaxInactiveInterval(30*60);
 		
 			
 				mav2.addObject("ID", ID);

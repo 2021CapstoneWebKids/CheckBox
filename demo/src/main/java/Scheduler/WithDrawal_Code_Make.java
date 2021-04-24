@@ -44,12 +44,13 @@ public class WithDrawal_Code_Make {
 		return () -> {
 			// 동적스케줄러 기능
 			// 트리거 주기마다 실행되는 기능코드
+			count++;
 		};
 	}
 	
 	private Trigger getTrigger() {
 		// 동적스케줄러 작업 주기 설정 트리거
-		count++;
+		
 		return new PeriodicTrigger(10, TimeUnit.SECONDS);
 	}
 	

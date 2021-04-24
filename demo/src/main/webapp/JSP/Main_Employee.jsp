@@ -223,6 +223,8 @@ height: 100%;
   	<td><button type="button" onclick="location.href='./CheckOut.do'">퇴근</button></td>
   </tr>
 </table>
+	
+	<span style= "margin:0 auto">${On_Work}</span>
   
   </div>
   
@@ -285,14 +287,6 @@ height: 100%;
                        <i class="fa fa-table fa-2x"></i>
                         <span class="nav-text">
                             Tables
-                        </span>
-                    </a>
-                </li>
-                <li>
-                   <a href="#">
-                        <i class="fa fa-map-marker fa-2x"></i>
-                        <span class="nav-text">
-                            Maps
                         </span>
                     </a>
                 </li>

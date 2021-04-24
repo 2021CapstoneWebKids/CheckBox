@@ -83,10 +83,15 @@ public class LoginController_UC1 {
 				session.setMaxInactiveInterval(30*60);
 		
 			
+				mav2.addObject("On_Work" ,
+						   "<span style=\"color:red\">"
+		              + "${ID}님은 출근중이 아닙니다"
+		              + "</span>");
 				mav2.addObject("ID", ID);
 				mav2.addObject("year", jdbc2.Select_Today_Year());
 				mav2.addObject("month", jdbc2.Select_Today_Month());
 				mav2.addObject("today"+jdbc2.Select_Today_Day() , "today");
+				
 				jdbc.set_User_Online(User_Num);
 				jdbc.Insert_Login_Track(User_Num, time_pr);
 			

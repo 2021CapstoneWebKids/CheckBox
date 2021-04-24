@@ -18,6 +18,7 @@ public class CheckInOut_Scheduler {
 	
 	public void stopScheduler() {
 		
+		WorkingTime = 0;
 		scheduler.shutdown();
 		System.out.println(new Date() + " " + ID + "님이 퇴근함"
 				+ "총 근무시간 : " + WorkingTime + "분\n");

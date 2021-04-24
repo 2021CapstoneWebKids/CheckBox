@@ -223,6 +223,8 @@ height: 100%;
   	<td><button type="button" onclick="location.href='./CheckOut.do'">퇴근</button></td>
   </tr>
 </table>
+
+	<span style= "margin:0 auto"> ${On_Work}</span>
   
   </div>
   

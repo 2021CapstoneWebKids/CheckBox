@@ -216,7 +216,7 @@ a {
 
 	.Calender
 {
-  width: 480px; 
+  width: 680px; 
   margin: 100px auto auto auto;
   text-align: center;
   border: 3px solid black;
@@ -266,32 +266,10 @@ a {
 
 </style>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
 
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
 
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-        chart.draw(data, options);
-      }
-    </script>
-    
 </head>
 	<body>
 	
@@ -312,78 +290,8 @@ a {
   <div class="page" id="p1">
      
      <div class="Calender">
-    <div class="Current-Day">${year}년 ${month}월</div>
-    <div class="Week-Days">
-      <table>
-        <tr>
-          <td>일</td>
-          <td>월</td>
-          <td>화</td>
-          <td>수</td>
-          <td>목</td>
-          <td>금</td>
-          <td>토</td>
-        </tr>
-      </table>
-    </div>
-    <div class="Days">
-      <table>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td ${today1}>1</td>
-          <td ${today2}>2</td>
-          <td ${today3}>3</td>
-          
-        </tr>
-          <td ${today4}>4</td>
-          <td ${today5}>5</td>
-          <td ${today6}>6</td>
-          <td ${today7}>7</td>
-          <td ${today8}>8</td>
-          <td ${today9}>9</td>
-          <td ${today10}>10</td>
-          
-        </tr>
-          
-          <!--  <td class="T" ${today11}>11</td> -->
-          <td ${today11}>11</td>
-          <td ${today12}>12</td>
-          <!--  <td style="color:green" onClick="location.href='./login'">13</td> -->
-          <td ${today13}>13</td>
-          <td ${today14}>14</td>
-          <td ${today15}>15</td>
-          <td ${today16}>16</td>
-          <td ${today17}>17</td>
-          
-        </tr>
-          <tr>
-          <td ${today18}>18</td>
-          <td ${today19}>19</td>
-          <td ${today20}>20</td>
-          <td ${today21}>21</td>
-          <td ${today22}>22</td>
-          <td ${today23}>23</td>
-          <td ${today24}>24</td>
-          
-        </tr>
-          <tr>
-          <td ${today25}>25</td>
-          <td ${today26}>26</td>
-          <td ${today27}>27</td>
-          <td ${today28}>28</td>
-          <td ${today29}>29</td>
-          <td ${today30}>30</td>
-          <td class="T">1</td>
-        </tr>
-      </table>
-    </div>
-    
+     <div class="Current-Day">${year}년 ${month}월 ${day}일</div>
     <p>
-    	<button type="button" onclick="location.href='./CheckIn.do'">출근</button>
-    	
     	<button type="button" onclick="location.href='./CheckOut.do'">퇴근</button>
     </p>
     
@@ -399,7 +307,27 @@ a {
     </span>
     </div>
     
-    <div id="curve_chart" style="width: 100%; height: 100%"></div>
+    <div>
+	    <h2>TODO LIST</h2>
+	    <hr>
+	
+	    <h3>Todo</h3>
+	    
+	    	${todo_incompleted}
+	    
+	    <hr>
+	
+	    <h3>Completed</h3>
+	    
+	    	${todo_completed }
+	    
+	    <hr>
+	    
+    </div>
+    
+    
+    
+    
     
   </div>
  
@@ -419,7 +347,7 @@ a {
   
   <div class="page" id="p4">
    <li class="icon fa fa-info-circle">
-   	<span class="title">Dribbble</span>
+   	<span class="title">Info</span>
    	<span class="hint">
    		<a href="modify_info.do">개인정보 수정
    	</span>

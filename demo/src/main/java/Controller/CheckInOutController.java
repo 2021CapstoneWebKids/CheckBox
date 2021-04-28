@@ -39,13 +39,11 @@ public class CheckInOutController {
 		ModelAndView mav = new ModelAndView("JSP/OnWork_Employee.jsp");
 		
 		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
-		SimpleDateFormat format2 = new SimpleDateFormat ( "MM");
-		SimpleDateFormat format3 = new SimpleDateFormat ( "dd");
 		
 		Date time = new Date();
 		String time_pr = format1.format(time);
-		String time_m = format2.format(time);
-		String time_d = format3.format(time);
+		String time_m = jdbc2.Select_Today_Month();
+		String time_d = jdbc2.Select_Today_Day();
 		
 		jdbc.CheckIn(session.getAttribute("User_Num"), time_pr);
 		jdbc.Record_AttendanceDay(session.getAttribute("User_Num"), time_m, time_d);
@@ -60,18 +58,7 @@ public class CheckInOutController {
 		mav.addObject("ID", session.getAttribute("ID"));
 		mav.addObject("year", jdbc2.Select_Today_Year());
 		mav.addObject("month", jdbc2.Select_Today_Month());
-		mav.addObject("today"+jdbc2.Select_Today_Day() , "style=\"background-color:green\"");
-		
-		for(int i=1; i< Integer.parseInt(jdbc2.Select_Today_Day()); i++) {
-			
-			mav.addObject("today"+i , "style=\"background-color:gray\"");
-		}
-		
-		for(String str : jdbc3.Select_AttendanceDay(session.getAttribute("User_Num"), jdbc2.Select_Today_Month())) {
-			
-			mav.addObject("today"+str , "style=\"background-color:blue\"");
-			
-		}
+		mav.addObject("day", jdbc2.Select_Today_Day());
 		
 		
 		return mav;
@@ -87,7 +74,9 @@ public class CheckInOutController {
 		String time_pr = format1.format(time);
 		
 		jdbc.CheckOut(session.getAttribute("User_Num"), time_pr);
+		
 		cs.stopScheduler();
+		cs.setWorkingTime(0);
 		
 		
 		mav.addObject("On_Work" ,
@@ -97,7 +86,7 @@ public class CheckInOutController {
 		mav.addObject("ID", session.getAttribute("ID"));
 		mav.addObject("year", jdbc2.Select_Today_Year());
 		mav.addObject("month", jdbc2.Select_Today_Month());
-		mav.addObject("today"+jdbc2.Select_Today_Day() , "style=\"background-color:green\"");
+		
 		
 		for(int i=1; i< Integer.parseInt(jdbc2.Select_Today_Day()); i++) {
 			
@@ -110,11 +99,13 @@ public class CheckInOutController {
 			
 		}
 		
+		mav.addObject("today"+jdbc2.Select_Today_Day() , "style=\"background-color:green\"");
+		
 		
 		jdbc.Record_WorkingHour(session.getAttribute("User_Num"),
 				time_pr , cs.getWorkingTime());
 		
-		cs.setWorkingTime(0);
+		
 		
 		return mav;
 	}

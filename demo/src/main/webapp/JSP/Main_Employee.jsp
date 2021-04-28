@@ -216,7 +216,7 @@ a {
 
 	.Calender
 {
-  width: 480px; 
+  width: 680px; 
   margin: 100px auto auto auto;
   text-align: center;
   border: 3px solid black;
@@ -388,7 +388,7 @@ a {
     
     <div>
     <span>
-    	${ID}님 으로 사용중
+    	${ID}님 으로 사용중 | 권한 : Employee
     </span>
     </div>
     

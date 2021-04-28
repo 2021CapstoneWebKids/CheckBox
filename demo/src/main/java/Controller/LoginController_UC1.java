@@ -96,18 +96,17 @@ public class LoginController_UC1 {
 				
 				mav2.addObject("year", jdbc2.Select_Today_Year());
 				mav2.addObject("month", jdbc2.Select_Today_Month());
-				mav2.addObject("today"+jdbc2.Select_Today_Day() , "style=\"background-color:green\"");
+				
 				
 				for(int i=1; i< Integer.parseInt(jdbc2.Select_Today_Day()); i++) {
-					
 					mav2.addObject("today"+i , "style=\"background-color:gray\"");
 				}
 				
 				for(String str : jdbc3.Select_AttendanceDay(User_Num, jdbc2.Select_Today_Month())) {
-					
 					mav2.addObject("today"+str , "style=\"background-color:blue\"");
-					
 				}
+				
+				mav2.addObject("today"+jdbc2.Select_Today_Day() , "style=\"background-color:green\"");
 				
 				
 				jdbc.set_User_Online(User_Num);
@@ -121,10 +120,14 @@ public class LoginController_UC1 {
 				session.setAttribute("User_Num" , User_Num);
 				session.setAttribute("ID" , ID);
 				
-				session.setMaxInactiveInterval(1*60);
+				session.setMaxInactiveInterval(30*60);
 		
 			
 				mav3.addObject("ID", ID);
+				mav3.addObject("year", jdbc2.Select_Today_Year());
+				mav3.addObject("month", jdbc2.Select_Today_Month());
+				mav3.addObject("day", jdbc2.Select_Today_Day());
+				
 				jdbc.set_User_Online(User_Num);
 				jdbc.Insert_Login_Track(User_Num, time_pr);
 			

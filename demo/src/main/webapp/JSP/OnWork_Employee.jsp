@@ -2,322 +2,438 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
- 
- 	<style>
- 		@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-}
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
-.fa-2x {
-font-size: 2em;
-}
-.fa {
-position: relative;
-display: table-cell;
-width: 60px;
-height: 36px;
-text-align: center;
-vertical-align: middle;
-font-size:20px;
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta charset="UTF-8">
+<title>직원용 메인 페이지</title>
+
+<style>
+	* {
+  transition: all 500ms ease-out;
+  -webkit-transition: all 500ms ease-out;
 }
 
-
-.main-menu:hover,nav.main-menu.expanded {
-width:250px;
-overflow:visible;
+html, body, section, .page {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  transition: all 1s cubic-bezier(.5, -0.005, 0.2, 1) !important;
+  -webkit-transition: all 1s cubic-bezier(.5, -0.005, 0.2, 1) !important;
+  color: #fff;
+  background: #374046;
+  overflow: hidden;
 }
 
-.main-menu {
-background:#212121;
-border-right:1px solid #e5e5e5;
-position:absolute;
-top:0;
-bottom:0;
-height:100%;
-left:0;
-width:60px;
-overflow:hidden;
--webkit-transition:width .05s linear;
-transition:width .05s linear;
--webkit-transform:translateZ(0) scale(1,1);
-z-index:1000;
+section {
+  width:400%;  
 }
 
-.main-menu>ul {
-margin:7px 0;
+.page {
+  position: absolute;
 }
 
-.main-menu li {
-position:relative;
-display:block;
-width:250px;
+#p1 {
+  left: 0;
 }
 
-.main-menu li>a {
-position:relative;
-display:table;
-border-collapse:collapse;
-border-spacing:0;
-color:#999;
- font-family: arial;
-font-size: 14px;
-text-decoration:none;
--webkit-transform:translateZ(0) scale(1,1);
--webkit-transition:all .1s linear;
-transition:all .1s linear;
+#p2 {
+  left: 100%;
+  background: #FF5722;
+}
+
+#p3 {
+  left: 200%;
+  background: #593C1F;
+}
+
+#p4 {
+  left: 300%;
+  background: deeppink;
+}
+
+ul {
+ position: fixed; 
+ z-index: 1;
+}
+#t1:target .page#p1 {
+    transform: translateX(0);
+}
+#t2:target .page#p2 {
+    transform: translateX(-90%);
+}
+#t3:target .page#p3 {
+    transform: translateX(-190%);
+}
+#t4:target .page#p4 {
+    transform: translateX(-290%);
+}
+
+#t2:target .page#p1, 
+#t3:target .page#p1,
+#t4:target .page#p1 {
+  background: black;
+}
+
+#t2:target .page#p1 .icon, 
+#t3:target .page#p1 .icon,
+#t4:target .page#p1 .icon {
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+}
+
+.icon {
+  color: #fff;
+  font-size: 32px;
+  display: block;
+}
+
+ul .icon:hover {
+  opacity: 0.6;
+}
+
+#p1 .icon .title {
+  margin-bottom: 20px;
+}
+
+#t2:target ul .icon,
+#t3:target ul .icon,
+#t4:target ul .icon {
+  transform: scale(.6); 
+  transition-delay: .25s;
+}
+
+#t2:target #dos {
+  transform: scale(1.2) !important;
+}
+
+#t3:target #tres {
+  transform: scale(1.2) !important;
+}
+
+#t4:target #cuatro {
+  transform: scale(1.2) !important;
+}
+
+ul {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  /*right: 0;*/
+  margin: auto;
+  height: 280px;
+  width: 10%;
+  padding: 0;
+  text-align: center;
+ }
+
+ul li {
+  margin: 30px 0;
+}
+
+a {
+  text-decoration: none;
+  font-family: open sans, sans-serif;
+}
+
+.title, .hint {
+  font-family: open sans, sans-serif;
+  display: block;
+}
+
+.title {
+  font-size: 38px;
+}
+
+.hint {
+  font-size: 13px;
+}
+
+.hint a {
+  color: #EFFF06;
+  transition: all 250ms easet-out;
+}
+
+.hint a:hover {
+  color: #FFF;
+}
+
+.page .icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 10%;
+  left: 0;
+  width: 270px;
+  height: 170px;
+  margin: auto;
+  text-align: center;
+  font-size: 80px;
+  transform: translateX(360%);
+  line-height: 1.3;
+}
+
+.page#p1 .icon {
+  height: 220px;
+}
+
+.page#p1 .icon {
+  transform: translateX(0) !important;
+}
+
+#t2:target .page#p2 .icon {
+  transform: translateX(0) !important;
+  transition-delay: 1s;
+}
+
+#t3:target .page#p3 .icon {
+  transform: translateX(0) !important;
+  transition-delay: 1s;
+}
+
+#t4:target .page#p4 .icon {
+  transform: translateX(0) !important;
+  transition-delay: 1s;
+}
+
+.credit{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+}
+
+.credit a {
+  color: #fff
+}
+
+</style>
+
+<style>
+
+
+	.Calender
+{
+  width: 480px; 
+  margin: 100px auto auto auto;
+  text-align: center;
+  border: 3px solid black;
+
   
 }
 
-.main-menu .nav-icon {
-position:relative;
-display:table-cell;
-width:60px;
-height:36px;
-text-align:center;
-vertical-align:middle;
-font-size:18px;
+.Current-Day
+{
+
+  background:linear-gradient(#3468af,#3468af);
+  color:#FFF;
+  line-height: 50px;
+  font-size: 19pt;
+}
+.post
+{
+  background:linear-gradient(#e64c65,#e64c65);
+  color:#fff;
 }
 
-.main-menu .nav-text {
-position:relative;
-display:table-cell;
-vertical-align:middle;
-width:190px;
-  font-family: 'Titillium Web', sans-serif;
+.Week-Days
+{
+  background: #394264;
+  color: #4ec4ed;
 }
-
-.main-menu>ul.logout {
-position:absolute;
-left:0;
-bottom:0;
+.Week-Days td, .Days td
+{
+  width: 480px;
 }
-
-.no-touch .scrollable.hover {
-overflow-y:hidden;
+.Days .T
+{
+  color: #8e898e;
 }
-
-.no-touch .scrollable.hover:hover {
-overflow-y:auto;
-overflow:visible;
+.Days table td 
+{
+  background-color: #394264;
+  color: #FFF;
 }
-
-a:hover,a:focus {
-text-decoration:none;
+.Days table td:hover
+{
+  background: #fff;
+  cursor: pointer;
+  color: #3468af;
 }
+/*KHALED CODER :) */
 
-nav {
--webkit-user-select:none;
--moz-user-select:none;
--ms-user-select:none;
--o-user-select:none;
-user-select:none;
-}
+</style>
 
-nav ul,nav li {
-outline:0;
-margin:0;
-padding:0;
-}
-.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
-color:#fff;
-background-color:#5fa2db;
-}
-.area {
-float: left;
-background: #e2e2e2;
-width: 100%;
-height: 100%;
-}
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
-}
- 	</style>
- 	
- 	<style>
- 	table {width: 90%; margin: 0% 0% 0% 7%; box-sizing: border-box; box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.1); font-family: 'Ubuntu'; /*border-collapse: collapse;*/ border-spacing: 0; background-color: #333333; }
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
-	th, td { border: 1px solid rgba(255,255,255,0.1); box-sizing: border-box; }
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
 
-	th { text-transform: uppercase; font-size:10px; font-weight:700; padding: 10px 0; color: rgba(255,255,255,0.5); background-color: #292929; letter-spacing: 1px; }
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
 
-	td { width: 14.285%; transition: all 0.3s; font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 400; font-size: 14px; padding: 1.5% 1.5% 5%; vertical-align: initial; padding: 1.5% 0 ; height: 75px; }
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-	.day:hover { background-color: rgba(0,0,0,0.1); cursor:pointer; }
-
-	.today { color: #FFF; background-color: rgba(0,0,0,.25) !important; }
-
-	span.number { margin-left: 10% }
-
-	span.event { height: 4px; background-color: rgba(0,0,0,.3); display: block; margin: 5px 10%; border-radius: 2px; background-color: #91c33b; }
-
-	span.event-multiday { margin: 9px -4px; border-radius: 0; }
-	span.event-multiday-start { margin-right: -7px;  }
-	span.event-multiday-finish { margin-left: -7px;  }
-
-	span.event-ghost { background-color:transparent; }
- 	
-
- 	</style>
- 	
- 		<script language="javascript">
- 			function time(){
-  				var time= new Date(); //시간받기위해서 new date
-     			document.getElementById("now").innerHTML=time.getHours()+"시"+time.getMinutes()+"분"+time.getSeconds()+"초";
-     			setInterval("time()",1000);     //1초 지난후 time()실행
-  			}
-      	</script>
-  </head>
-  <body onload="time()">
-  
-  <div class="area">
-  
-  	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
-
+        chart.draw(data, options);
+      }
+    </script>
+    
+</head>
+	<body>
 	
-<table>
-  <tr>
-    <td class="day ${today1}"><span class="number">1</span><span class="event"></span><span class="event"></span></td>
-    <td class="day ${today2}"><span class="number">2</span></td>
-    <td class="day ${today3}"><span class="number">3</span><span class="event event-multiday-start"></span></td>
-    <td class="day ${today4}"><span class="number">4</span><span class="event event-multiday"></span><span class="event event-multiday-start eventclass" style="background-color:#5a9ab2;"></span><span class="event"></td>
-    <td class="day ${today5}"><span class="number">5</span><span class="event event-multiday-finish"></span><span class="event event-multiday eventclass" style="background-color:#5a9ab2;"></span></td>
-    <td class="day ${today6}"><span class="number">6</span><span class="event event-ghost"></span><span class="event event-multiday-finish eventclass" style="background-color:#5a9ab2;"></span></td>
-  </tr>
-  <tr>
-    <td class="day ${today7}"><span class="number">7</span></td>
-    <td class="day ${today8}"><span class="number">8</span><span class="event"></span></td>
-    <td class="day ${today9}"><span class="number">9</span></td>
-    <td class="day ${today10}"><span class="number">10</span></td>
-    <td class="day ${today11}"><span class="number">11</span></td>
-    <td class="day ${today12}"><span class="number">12</span></td>
-    <td class="day ${today13}"><span class="number">13</span></td>
-  </tr>
-  <tr>
-    <td class="day ${today14}"><span class="number">14</span></td>
-    <td class="day ${today15}"><span class="number">15</span></td>
-    <td class="day ${today16}"><span class="number">16</span><span class="event"></span></td>
-    <td class="day ${today17}"><span class="number">17</span><span class="event"></span></td>
-    <td class="day ${today18}"><span class="number">18</span></td>
-    <td class="day ${today19}"><span class="number">19</span></td>
-    <td class="day ${today20}"><span class="number">20</span></td>
-  </tr>
-  <tr>
-    <td class="day ${today21}"><span class="number">21</span></td>
-    <td class="day ${today22}"><span class="number">22</span></td>
-    <td class="day ${today23}"><span class="number">23</span></td>
-    <td class="day ${today24}"><span class="number">24</span></td>
-    <td class="day ${today25}"><span class="number">25</span></td>
-    <td class="day ${today26}"><span class="number">26</span></td>
-    <td class="day ${today27}"><span class="number">27</span><span class="event event-multiday-start" style="background-color:#da5f5f;"></td>
-  </tr>
-  <tr>
-    <td class="day ${today28}"><span class="number">28</span><span class="event event-multiday" style="background-color:#da5f5f;"></td>
-    <td class="day ${today29}"><span class="number">29</span><span class="event event-multiday-finish" style="background-color:#da5f5f;"></td>
-    <td class="day ${today30}"><span class="number">30</span></td>
-    <td class="day ${today31}"><span class="number">31</span></td>
-  	<td>${year}년 ${month}월</td>
-  	<td><button type="button" onclick="location.href='./CheckIn.do'">출근</button></td>
-  	<td><button type="button" onclick="location.href='./CheckOut.do'">퇴근</button></td>
-  </tr>
-</table>
-
-	<span style= "margin:0 auto"> ${On_Work}</span>
+		<div class="ct" id="t1">
+ 		<div class="ct" id="t2">
+   		<div class="ct" id="t3">
+     	<div class="ct" id="t4">
+<section>
   
+ <ul>
+   <a href="#t1"><li class="icon fa fa-home" id="uno"></li></a>
+   <a href="#t2"><li class="icon fa fa-keyboard-o" id="dos"></li></a>
+   <a href="#t3"><li class="icon fa fa-coffee" id="tres"></li></a>
+   <a href="#t4"><li class="icon fa fa-info-circle" id="cuatro"></li></a>
+ </ul>
+ 
+ 
+  <div class="page" id="p1">
+     
+     <div class="Calender">
+    <div class="Current-Day">${year}년 ${month}월</div>
+    <div class="Week-Days">
+      <table>
+        <tr>
+          <td>일</td>
+          <td>월</td>
+          <td>화</td>
+          <td>수</td>
+          <td>목</td>
+          <td>금</td>
+          <td>토</td>
+        </tr>
+      </table>
+    </div>
+    <div class="Days">
+      <table>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td ${today1}>1</td>
+          <td ${today2}>2</td>
+          <td ${today3}>3</td>
+          
+        </tr>
+          <td ${today4}>4</td>
+          <td ${today5}>5</td>
+          <td ${today6}>6</td>
+          <td ${today7}>7</td>
+          <td ${today8}>8</td>
+          <td ${today9}>9</td>
+          <td ${today10}>10</td>
+          
+        </tr>
+          
+          <!--  <td class="T" ${today11}>11</td> -->
+          <td ${today11}>11</td>
+          <td ${today12}>12</td>
+          <!--  <td style="color:green" onClick="location.href='./login'">13</td> -->
+          <td ${today13}>13</td>
+          <td ${today14}>14</td>
+          <td ${today15}>15</td>
+          <td ${today16}>16</td>
+          <td ${today17}>17</td>
+          
+        </tr>
+          <tr>
+          <td ${today18}>18</td>
+          <td ${today19}>19</td>
+          <td ${today20}>20</td>
+          <td ${today21}>21</td>
+          <td ${today22}>22</td>
+          <td ${today23}>23</td>
+          <td ${today24}>24</td>
+          
+        </tr>
+          <tr>
+          <td ${today25}>25</td>
+          <td ${today26}>26</td>
+          <td ${today27}>27</td>
+          <td ${today28}>28</td>
+          <td ${today29}>29</td>
+          <td ${today30}>30</td>
+          <td class="T">1</td>
+        </tr>
+      </table>
+    </div>
+    
+    <p>
+    	<button type="button" onclick="location.href='./CheckIn.do'">출근</button>
+    	
+    	<button type="button" onclick="location.href='./CheckOut.do'">퇴근</button>
+    </p>
+    
+    <div>
+    <span>
+    	${ID}님 으로 사용중
+    </span>
+    </div>
+    
+    <div>
+    <span>
+    	${On_Work}
+    </span>
+    </div>
+    
+    <div id="curve_chart" style="width: 100%; height: 100%"></div>
+    
+  </div>
+ 
+     
   </div>
   
-  <nav class="main-menu">
-            <ul>
-                <li>
-                    <a href="http://justinfarrow.com">
-                        <i class="fa fa-home fa-2x"></i>
-                        <span class="nav-text">
-                            Dashboard
-                        </span>
-                    </a>
-                  
-                </li>
-                <li class="has-subnav">
-                    <a href="#">
-                        <i class="fa fa-laptop fa-2x"></i>
-                        <span class="nav-text">
-                            Stars Components
-                        </span>
-                    </a>
-                    
-                </li>
-                <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa fa-list fa-2x"></i>
-                        <span class="nav-text">
-                            Forms
-                        </span>
-                    </a>
-                    
-                </li>
-                <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa fa-folder-open fa-2x"></i>
-                        <span class="nav-text">
-                            Pages
-                        </span>
-                    </a>
-                   
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-bar-chart-o fa-2x"></i>
-                        <span class="nav-text">
-                            Graphs and Statistics
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-font fa-2x"></i>
-                        <span class="nav-text">
-                           Quotes
-                        </span>
-                    </a>
-                </li>
-                <li>
-                   <a href="#">
-                       <i class="fa fa-table fa-2x"></i>
-                        <span class="nav-text">
-                            Tables
-                        </span>
-                    </a>
-                </li>
-                <li>
-                   <a href="#">
-                        <i class="fa fa-map-marker fa-2x"></i>
-                        <span class="nav-text">
-                            Maps
-                        </span>
-                    </a>
-                </li>
-                <li>
-                	<a href="modify_info.do">
-                       <i class="fa fa-info fa-2x"></i>
-                        <span class="nav-text">
-                            ${ID}님 으로 사용중
-                        </span>
-                    </a>
-                </li>
-            </ul>
-
-            <ul class="logout">
-                <li>
-                   <a href="logout.do">
-                         <i class="fa fa-power-off fa-2x"></i>
-                        <span class="nav-text">
-                            Logout
-                        </span>
-                    </a>
-                </li>  
-            </ul>
-        </nav>
-  </body>
-    </html>
+  
+  <div class="page" id="p2">
+    <li class="icon fa fa-keyboard-o"><span class="title">Type</span></li>
+  </div>  
+  
+  
+  <div class="page" id="p3">
+    <li class="icon fa fa-coffee"><span class="title">Coffee</span></li>
+  </div>
+  
+  
+  <div class="page" id="p4">
+   <li class="icon fa fa-info-circle">
+   	<span class="title">Dribbble</span>
+   	<span class="hint">
+   		<a href="modify_info.do">개인정보 수정
+   	</span>
+   </li>
+  </div>  
+  
+  
+  
+</section>
+       
+     	</div>
+     	</div>
+  		</div>
+  		</div>
+  
+	</body>
+</html>

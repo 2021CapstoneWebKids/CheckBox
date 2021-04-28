@@ -27,7 +27,11 @@ public class CheckInOutController {
 	private Repository_Server jdbc2;
 	
 	@Autowired
+	private Repository_CheckInOut jdbc3;
+	
+	@Autowired
 	CheckInOut_Scheduler cs;
+	
 	
 	@RequestMapping(value = {"CheckIn.do"})
 	public ModelAndView CheckIn(HttpSession session , HttpServletRequest req ) throws IOException {
@@ -35,20 +39,39 @@ public class CheckInOutController {
 		ModelAndView mav = new ModelAndView("JSP/OnWork_Employee.jsp");
 		
 		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat format2 = new SimpleDateFormat ( "MM");
+		SimpleDateFormat format3 = new SimpleDateFormat ( "dd");
+		
 		Date time = new Date();
 		String time_pr = format1.format(time);
+		String time_m = format2.format(time);
+		String time_d = format3.format(time);
 		
 		jdbc.CheckIn(session.getAttribute("User_Num"), time_pr);
+		jdbc.Record_AttendanceDay(session.getAttribute("User_Num"), time_m, time_d);
+		
 		cs.startScheduler(session.getAttribute("ID"));
 		
+		
 		mav.addObject("On_Work" ,
-				   "<span style=\"color:green\">"
-              + "${ID}님은 출근중입니다."
-              + "</span>");
+				   "<div><span style=\"color:green\">"
+              + "출근중입니다."
+              + "</span></div>");
 		mav.addObject("ID", session.getAttribute("ID"));
 		mav.addObject("year", jdbc2.Select_Today_Year());
 		mav.addObject("month", jdbc2.Select_Today_Month());
-		mav.addObject("today"+jdbc2.Select_Today_Day() , "today");
+		mav.addObject("today"+jdbc2.Select_Today_Day() , "style=\"background-color:green\"");
+		
+		for(int i=1; i< Integer.parseInt(jdbc2.Select_Today_Day()); i++) {
+			
+			mav.addObject("today"+i , "style=\"background-color:gray\"");
+		}
+		
+		for(String str : jdbc3.Select_AttendanceDay(session.getAttribute("User_Num"), jdbc2.Select_Today_Month())) {
+			
+			mav.addObject("today"+str , "style=\"background-color:blue\"");
+			
+		}
 		
 		
 		return mav;
@@ -66,17 +89,32 @@ public class CheckInOutController {
 		jdbc.CheckOut(session.getAttribute("User_Num"), time_pr);
 		cs.stopScheduler();
 		
+		
 		mav.addObject("On_Work" ,
-				   "<span style=\"color:red\">"
-              + "${ID}님은 출근중이 아닙니다"
-              + "</span>");
+				   "<div><span style=\"color:red\">"
+              + "출근중이 아닙니다"
+              + "</span></div>");
 		mav.addObject("ID", session.getAttribute("ID"));
 		mav.addObject("year", jdbc2.Select_Today_Year());
 		mav.addObject("month", jdbc2.Select_Today_Month());
-		mav.addObject("today" + jdbc2.Select_Today_Day() , "today");
+		mav.addObject("today"+jdbc2.Select_Today_Day() , "style=\"background-color:green\"");
+		
+		for(int i=1; i< Integer.parseInt(jdbc2.Select_Today_Day()); i++) {
+			
+			mav.addObject("today"+i , "style=\"background-color:gray\"");
+		}
+		
+		for(String str : jdbc3.Select_AttendanceDay(session.getAttribute("User_Num"), jdbc2.Select_Today_Month())) {
+			
+			mav.addObject("today"+str , "style=\"background-color:blue\"");
+			
+		}
+		
 		
 		jdbc.Record_WorkingHour(session.getAttribute("User_Num"),
 				time_pr , cs.getWorkingTime());
+		
+		cs.setWorkingTime(0);
 		
 		return mav;
 	}

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import JDBC.Repository_CheckInOut;
 import JDBC.Repository_Login;
 import JDBC.Repository_Server;
 import Pre_Settings.SessionListener;
@@ -34,6 +35,10 @@ public class LoginController_UC1 {
 	
 	@Autowired
 	private Repository_Server jdbc2;
+	
+	@Autowired
+	private Repository_CheckInOut jdbc3;
+	
 	
 	@RequestMapping(value = {"/login" , "/index" , ""})
 	public ModelAndView Main_Login() throws IOException {
@@ -82,15 +87,28 @@ public class LoginController_UC1 {
 				
 				session.setMaxInactiveInterval(30*60);
 		
-			
 				mav2.addObject("On_Work" ,
 						   "<span style=\"color:red\">"
-		              + "${ID}님은 출근중이 아닙니다"
+		              + "출근중이 아닙니다"
 		              + "</span>");
+				
 				mav2.addObject("ID", ID);
+				
 				mav2.addObject("year", jdbc2.Select_Today_Year());
 				mav2.addObject("month", jdbc2.Select_Today_Month());
-				mav2.addObject("today"+jdbc2.Select_Today_Day() , "today");
+				mav2.addObject("today"+jdbc2.Select_Today_Day() , "style=\"background-color:green\"");
+				
+				for(int i=1; i< Integer.parseInt(jdbc2.Select_Today_Day()); i++) {
+					
+					mav2.addObject("today"+i , "style=\"background-color:gray\"");
+				}
+				
+				for(String str : jdbc3.Select_AttendanceDay(User_Num, jdbc2.Select_Today_Month())) {
+					
+					mav2.addObject("today"+str , "style=\"background-color:blue\"");
+					
+				}
+				
 				
 				jdbc.set_User_Online(User_Num);
 				jdbc.Insert_Login_Track(User_Num, time_pr);

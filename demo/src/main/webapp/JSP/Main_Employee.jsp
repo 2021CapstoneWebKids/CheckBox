@@ -438,6 +438,9 @@ a {
    	<span class="hint">
    		<a href="modify_info.do">개인정보 수정
    	</span>
+   	<span class="hint">
+   		<a href="logout.do">로그아웃</a>
+   	</span>
    </li>
   </div>  
   

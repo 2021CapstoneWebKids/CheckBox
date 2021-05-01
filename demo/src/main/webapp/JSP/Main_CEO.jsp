@@ -231,8 +231,33 @@ a {
   font-size: 19pt;
 }
 </style>
+
+<script language="javascript">
+ function time(){
+  var time= new Date(); //시간받기위해서 new date
+      document.getElementById("now").innerHTML=time.getHours()+"시"+time.getMinutes()+"분"+time.getSeconds()+"초";
+     setInterval("time()",1000);     //1초 지난후 time()실행
+  }
+</script>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+function checkBox() {
+var check_Box = document.getElementsByName("FixOrFlow"); //체크박스 name
+for (j = 0; j < check_Box.length; j++) {
+ var disign = document.getElementById([j+1]); // 보여질내용
+ if(check_Box[j].checked == true ){
+  disign.style.display = "block";
+ }else{
+  check_Box[j].checked = false;
+  disign.style.display = "none";
+ }
+ }
+}
+</script>
+
 </head>
-	<body>
+	<body onload="time()">
 	
 		<div class="ct" id="t1">
  		<div class="ct" id="t2">
@@ -271,10 +296,10 @@ a {
     
     	<div>
     	
-		    <h2>TODO LIST</h2>
+		    <h2 style="color:yellow">TODO LIST (CEO)</h2>
 		    <hr>
 		
-		    <h3>Incomplted</h3>
+		    <h3 style="color:red">Incomplted</h3>
 		    
 		    <p id="p1" style="color:red"> 
 		    	abcd 
@@ -303,17 +328,71 @@ a {
 		    
 		    <hr>
 		
-		    <h3>Completed</h3>
 		    
-		    <p style="color:blue"> asqw </p>
-		    <p style="color:blue"> ughethf </p>
 		    
-		    	${todo_completed }
+		    <details>
+		    	<summary style="color:skyblue">Completed</summary>
+		    		<p style="color:skyblue"> asqw </p>
+		    		<p style="color:skyblue"> ughethf </p>
+		    
+		    		${todo_completed }
+		    	
+		    	
+		    </details>
 		    
 		    <hr>
 		    
-		    <button> </button>
-	    
+		    <details>
+		    
+    			<summary style="color:greenyellow">ToDo 추가</summary>
+    			
+    				<form id="contact" action="./login.do" method="post">
+  
+					    <fieldset>
+					      
+					      <p> 업무 발행자 : ${ID} 
+					      	<br>
+					      	현재 시간: <span id="now"></span>
+					      </p>
+					      
+					      <br>
+					      <input type="radio" id="TT1" name="TT" value="Type1">타입1
+						  <input type="radio" id="TT2" name="TT" value="Type2">타입2
+						  <input type="radio" id="TT3" name="TT" value="Type3">타입3
+					      <br>
+					      <input type="radio" id="FixOrFlow1" name="FixOrFlow" value="Fix" onClick="checkBox()">고정업무
+						  <input type="radio" id="FixOrFlow2" name="FixOrFlow" value="Flow" onClick="checkBox()">유동업무
+						  <br><br>
+						  
+						  <div id="1" style="display:none">
+						  	고정업무날짜
+						  	<br>
+						  	<input type="radio" id="Fix_day" name="Fix_Day" value="Monday">월요일
+						  	<input type="radio" id="Fix_day" name="Fix_Day" value="Tuesday">화요일
+						  	<input type="radio" id="Fix_day" name="Fix_Day" value="Wednesday">수요일
+						  	<input type="radio" id="Fix_day" name="Fix_Day" value="Thursday">목요일
+						  	<input type="radio" id="Fix_day" name="Fix_Day" value="Friday">금요일
+						  	<input type="radio" id="Fix_day" name="Fix_Day" value="Saturday">토요일
+						  	<input type="radio" id="Fix_day" name="Fix_Day" value="Sunday">일요일
+						  </div>
+						  
+						  <div id="2" style="display:none">
+						  	업무기한
+						  	<input type="datetime-local" id="Limit" name="Limit" value="업무기한">
+						  </div>
+						  <br><br>
+						  <input type="radio" id="Alarm" name="FixOrFlow" value="Alarm_On">알람설정O
+						  <input type="radio" id="Alarm" name="FixOrFlow" value="Alarm_Off">알람설정X
+						  
+						  <br><br>
+						  <input name="ID" id="ID" placeholder="업무내용" type="text" style="width:400px;height:150px;" required autofocus>
+					      <br><br>
+					      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">ToDo등록</button>
+					    </fieldset>
+					      
+					</form>
+					
+			</details>
     	</div>
     
     </div>
@@ -331,7 +410,10 @@ a {
    <li class="icon fa fa-info-circle">
    	<span class="title">Info</span>
    	<span class="hint">
-   		<a href="modify_info.do">개인정보 수정
+   		<a href="modify_info.do">개인정보 수정</a>
+   	</span>
+   	<span class="hint">
+   		<a href="logout.do">로그아웃</a>
    	</span>
    </li>
   </div>  

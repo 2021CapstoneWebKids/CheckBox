@@ -74,6 +74,8 @@ public class CheckInOutController {
 		String time_pr = format1.format(time);
 		
 		jdbc.CheckOut(session.getAttribute("User_Num"), time_pr);
+		jdbc.Record_WorkingHour(session.getAttribute("User_Num"),
+				time_pr , cs.getWorkingTime());
 		
 		cs.stopScheduler();
 		cs.setWorkingTime(0);
@@ -102,8 +104,6 @@ public class CheckInOutController {
 		mav.addObject("today"+jdbc2.Select_Today_Day() , "style=\"background-color:green\"");
 		
 		
-		jdbc.Record_WorkingHour(session.getAttribute("User_Num"),
-				time_pr , cs.getWorkingTime());
 		
 		
 		

@@ -50,6 +50,16 @@ public class Repository_Modify_Info {
 	
 	}
 	
+	public String select_MyWorkPlace_Number(Object object) {
+		
+		String sql = "Select User_WorkPlace_Number from user_workplace where "
+				+ "User_Number = '" + object + "'";
+		
+		String rs = jdbcTemplate.queryForObject(sql, String.class);
+		
+		return rs;
+	}
+	
 	public void update_MyName(String User_Num , String ch_name) {
 		
 		String sql = "Update users_name SET User_Name = '"

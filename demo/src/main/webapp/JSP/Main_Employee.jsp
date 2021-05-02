@@ -432,14 +432,17 @@ a {
   </div>
   
   
-  <div class="page" id="p4">
+   <div class="page" id="p4">
    <li class="icon fa fa-info-circle">
    	<span class="title">Info</span>
    	<span class="hint">
-   		<a href="modify_info.do">개인정보 수정
+   		<a href="modify_info.do">개인정보 수정</a>
    	</span>
    	<span class="hint">
    		<a href="logout.do">로그아웃</a>
+   	</span>
+   	<span class="hint">
+   		<a href="withdrawal.do">회원탈퇴</a>
    	</span>
    </li>
   </div>  

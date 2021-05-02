@@ -301,30 +301,15 @@ for (j = 0; j < check_Box.length; j++) {
 		
 		    <h3 style="color:red">Incomplted</h3>
 		    
-		    <p id="p1" style="color:red"> 
+		    <!--  <p id="p1" style="color:red"> 
 		    	abcd 
 		    	<button onclick="location.href=''">
 		    	삭제
 		    	</button>
 		    </p>
+		    -->
 		    
-		    <p id="p2" style="color:red"> 
-		    	edfg
-		    	<button onclick="location.href=''">
-		    	삭제
-		    	</button>
-		    </p>
-		    
-		    <p></p>
-		    
-		    	${todo_incompleted}
-		    
-		    
-		    
-		    
-		    
-		    
-		    
+		    ${todo_incompleted}
 		    
 		    <hr>
 		
@@ -346,7 +331,7 @@ for (j = 0; j < check_Box.length; j++) {
 		    
     			<summary style="color:greenyellow">ToDo 추가</summary>
     			
-    				<form id="contact" action="./login.do" method="post">
+    				<form id="contact" action="./Make_Todo.do" method="post">
   
 					    <fieldset>
 					      
@@ -381,11 +366,11 @@ for (j = 0; j < check_Box.length; j++) {
 						  	<input type="datetime-local" id="Limit" name="Limit" value="업무기한">
 						  </div>
 						  <br><br>
-						  <input type="radio" id="Alarm" name="FixOrFlow" value="Alarm_On">알람설정O
-						  <input type="radio" id="Alarm" name="FixOrFlow" value="Alarm_Off">알람설정X
+						  <input type="radio" id="Alarm" name="Alarm" value="Alarm_On">알람설정O
+						  <input type="radio" id="Alarm" name="Alarm" value="Alarm_Off">알람설정X
 						  
 						  <br><br>
-						  <input name="ID" id="ID" placeholder="업무내용" type="text" style="width:400px;height:150px;" required autofocus>
+						  <input name="Context" id="Context" placeholder="업무내용" type="text" style="width:400px;height:150px;" required autofocus>
 					      <br><br>
 					      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">ToDo등록</button>
 					    </fieldset>
@@ -414,6 +399,9 @@ for (j = 0; j < check_Box.length; j++) {
    	</span>
    	<span class="hint">
    		<a href="logout.do">로그아웃</a>
+   	</span>
+   	<span class="hint">
+   		<a href="withdrawal.do">회원탈퇴</a>
    	</span>
    </li>
   </div>  

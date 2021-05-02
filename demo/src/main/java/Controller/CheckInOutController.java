@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import JDBC.Repository_CheckInOut;
 import JDBC.Repository_Server;
+import JDBC.Repository_ToDo;
 import Scheduler.CheckInOut_Scheduler;
 
 @Controller
@@ -28,6 +29,9 @@ public class CheckInOutController {
 	
 	@Autowired
 	private Repository_CheckInOut jdbc3;
+	
+	@Autowired
+	private Repository_ToDo jdbc4;
 	
 	@Autowired
 	CheckInOut_Scheduler cs;
@@ -59,7 +63,8 @@ public class CheckInOutController {
 		mav.addObject("year", jdbc2.Select_Today_Year());
 		mav.addObject("month", jdbc2.Select_Today_Month());
 		mav.addObject("day", jdbc2.Select_Today_Day());
-		
+		mav.addObject("todo_incompleted_EMP" , jdbc4.Make_ToDo_Incompleted_List_EMP());
+		mav.addObject("todo_completed_EMP" , jdbc4.Make_ToDo_Complete());
 		
 		return mav;
 	}

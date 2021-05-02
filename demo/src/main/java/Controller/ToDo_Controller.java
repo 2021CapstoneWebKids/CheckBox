@@ -48,5 +48,49 @@ public class ToDo_Controller {
 		return rv;
 	}
 	
+	@RequestMapping(value = "Delete_Todo.do")
+	public RedirectView Delete_ToDo(HttpSession session , HttpServletRequest req) {
+		 
+		String Task_Number = req.getParameter("tns");
+		
+		jdbc.Delete_ToDo(Task_Number);
+		
+		System.out.println("TODO 삭제 완료\n");
+		
+		RedirectView rv = new RedirectView();
+		rv.setUrl("go_main.do");
+		
+		return rv;
+		
+	}
+	
+	@RequestMapping(value = "Complete_Todo.do")
+	public RedirectView Complete_ToDo(HttpSession session , HttpServletRequest req) {
+		 
+		String Task_Number = req.getParameter("tns");
+		
+		jdbc.Complete_ToDo(Task_Number);
+		
+		System.out.println("TODO 완료\n");
+		
+		RedirectView rv = new RedirectView();
+		rv.setUrl("go_main.do");
+		
+		return rv;
+		
+	}
+	
+	@RequestMapping(value = "Info_Todo.do")
+	public RedirectView Info_ToDo(HttpSession session , HttpServletRequest req) {
+		 
+		String Task_Number = req.getParameter("tns");
+		
+		RedirectView rv = new RedirectView();
+		rv.setUrl("go_main.do");
+		
+		return rv;
+		
+	}
+	
 	
 }

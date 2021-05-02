@@ -39,17 +39,17 @@ section {
 
 #p2 {
   left: 100%;
-  background: #FF5722;
+  background: #374046;
 }
 
 #p3 {
   left: 200%;
-  background: #593C1F;
+  background: #374046;
 }
 
 #p4 {
   left: 300%;
-  background: deeppink;
+  background: #374046;
 }
 
 ul {
@@ -266,7 +266,23 @@ a {
 
 </style>
 
-
+<style type="text/css">
+	.incom{
+	
+		border: 0px;
+		color: red;
+		background-color: #374046;
+	
+	}
+	
+	.com{
+	
+		border: 0px;
+		color: skyblue;
+		background-color: #374046;
+	
+	}
+</style>
 
 
 
@@ -308,22 +324,44 @@ a {
     </div>
     
     <div>
-	    <h2>TODO LIST</h2>
-	    <hr>
-	
-	    <h3>Todo</h3>
-	    
-	    	${todo_incompleted}
-	    
-	    <hr>
-	
-	    <h3>Completed</h3>
-	    
-	    	${todo_completed }
-	    
-	    <hr>
-	    
-    </div>
+    	
+		    <h2 style="color:yellow">TODO LIST (직원)</h2>
+		    <hr>
+		
+		    <h3 style="color:red">Incompleted</h3>
+		    
+		    <!--  <p id="p1" style="color:red"> 
+		    	abcd 
+		    	<button onclick="location.href=''">
+		    	삭제
+		    	</button>
+		    </p>
+		    -->
+		    
+		    <!--<form action="./Delete_ToDo.do" method="post">
+		    		<input type="text" name="tns" id="tns" value="" readonly/>
+		    		<input type="text" name="cons" id="cons" value="" readonly/>
+		    	<button name="submit" type="submit">삭제</button>
+		    </form>
+		    -->
+		    
+		    ${todo_incompleted_EMP}
+		    
+		    <hr>
+		
+		    
+		    
+		    <details>
+		    	<summary style="color:skyblue">Completed</summary>
+		    		
+		    
+		    ${todo_completed_EMP}
+		    	
+		    	
+		    </details>
+		    
+		    
+    	</div>
     
     
     

@@ -41,6 +41,14 @@ public class Common_Controller {
 		
 		if(Permission.equals("Employee")) {
 			
+			String ID = (String) session.getAttribute("ID");
+			mav1.addObject("ID", ID);
+			mav1.addObject("year", jdbc2.Select_Today_Year());
+			mav1.addObject("month", jdbc2.Select_Today_Month());
+			mav1.addObject("day", jdbc2.Select_Today_Day());
+			mav1.addObject("todo_incompleted_EMP" , jdbc4.Make_ToDo_Incompleted_List_EMP());
+			mav1.addObject("todo_completed_EMP" , jdbc4.Make_ToDo_Complete());
+			
 			return mav1;
 		}
 		
@@ -51,7 +59,8 @@ public class Common_Controller {
 			mav2.addObject("year", jdbc2.Select_Today_Year());
 			mav2.addObject("month", jdbc2.Select_Today_Month());
 			mav2.addObject("day", jdbc2.Select_Today_Day());
-			mav2.addObject("todo_incompleted" , jdbc4.Make_ToDo_Incompleted_List());
+			mav2.addObject("todo_incompleted_CEO" , jdbc4.Make_ToDo_Incompleted_List_CEO());
+			mav2.addObject("todo_completed_CEO" , jdbc4.Make_ToDo_Complete());
 			
 			return mav2;
 		}

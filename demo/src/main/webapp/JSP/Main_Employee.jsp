@@ -39,17 +39,17 @@ section {
 
 #p2 {
   left: 100%;
-  background: #FF5722;
+  background: #374046;
 }
 
 #p3 {
   left: 200%;
-  background: #593C1F;
+  background: #374046;
 }
 
 #p4 {
   left: 300%;
-  background: deeppink;
+  background: #374046;
 }
 
 ul {
@@ -432,9 +432,10 @@ a {
   </div>
   
   
-   <div class="page" id="p4">
+  <div class="page" id="p4">
    <li class="icon fa fa-info-circle">
    	<span class="title">Info</span>
+   	<br>
    	<span class="hint">
    		<a href="modify_info.do">개인정보 수정</a>
    	</span>

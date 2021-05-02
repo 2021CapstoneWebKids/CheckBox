@@ -256,6 +256,24 @@ for (j = 0; j < check_Box.length; j++) {
 }
 </script>
 
+<style type="text/css">
+	.incom{
+	
+		border: 0px;
+		color: red;
+		background-color: #374046;
+	
+	}
+	
+	.com{
+	
+		border: 0px;
+		color: skyblue;
+		background-color: #374046;
+	
+	}
+</style>
+
 </head>
 	<body onload="time()">
 	
@@ -299,7 +317,7 @@ for (j = 0; j < check_Box.length; j++) {
 		    <h2 style="color:yellow">TODO LIST (CEO)</h2>
 		    <hr>
 		
-		    <h3 style="color:red">Incomplted</h3>
+		    <h3 style="color:red">Incompleted</h3>
 		    
 		    <!--  <p id="p1" style="color:red"> 
 		    	abcd 
@@ -309,7 +327,14 @@ for (j = 0; j < check_Box.length; j++) {
 		    </p>
 		    -->
 		    
-		    ${todo_incompleted}
+		    <!--<form action="./Delete_ToDo.do" method="post">
+		    		<input type="text" name="tns" id="tns" value="" readonly/>
+		    		<input type="text" name="cons" id="cons" value="" readonly/>
+		    	<button name="submit" type="submit">삭제</button>
+		    </form>
+		    -->
+		    
+		    ${todo_incompleted_CEO}
 		    
 		    <hr>
 		
@@ -317,10 +342,9 @@ for (j = 0; j < check_Box.length; j++) {
 		    
 		    <details>
 		    	<summary style="color:skyblue">Completed</summary>
-		    		<p style="color:skyblue"> asqw </p>
-		    		<p style="color:skyblue"> ughethf </p>
+		    		
 		    
-		    		${todo_completed }
+		    ${todo_completed_CEO}
 		    	
 		    	
 		    </details>
@@ -331,7 +355,7 @@ for (j = 0; j < check_Box.length; j++) {
 		    
     			<summary style="color:greenyellow">ToDo 추가</summary>
     			
-    				<form id="contact" action="./Make_Todo.do" method="post">
+    				<form action="./Make_Todo.do" method="post">
   
 					    <fieldset>
 					      
@@ -372,7 +396,7 @@ for (j = 0; j < check_Box.length; j++) {
 						  <br><br>
 						  <input name="Context" id="Context" placeholder="업무내용" type="text" style="width:400px;height:150px;" required autofocus>
 					      <br><br>
-					      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">ToDo등록</button>
+					      <button name="submit" type="submit">ToDo등록</button>
 					    </fieldset>
 					      
 					</form>
@@ -394,6 +418,7 @@ for (j = 0; j < check_Box.length; j++) {
   <div class="page" id="p4">
    <li class="icon fa fa-info-circle">
    	<span class="title">Info</span>
+   	<br>
    	<span class="hint">
    		<a href="modify_info.do">개인정보 수정</a>
    	</span>

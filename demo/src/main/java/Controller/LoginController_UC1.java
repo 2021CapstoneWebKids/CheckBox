@@ -111,7 +111,8 @@ public class LoginController_UC1 {
 				}
 				
 				mav2.addObject("today"+jdbc2.Select_Today_Day() , "style=\"background-color:green\"");
-				
+				mav2.addObject("todo_incompleted_EMP" , jdbc4.Make_ToDo_Incompleted_List_EMP());
+				mav2.addObject("todo_completed_EMP" , jdbc4.Make_ToDo_Complete());
 				
 				jdbc.set_User_Online(User_Num);
 				jdbc.Insert_Login_Track(User_Num, time_pr);
@@ -131,7 +132,8 @@ public class LoginController_UC1 {
 				mav3.addObject("year", jdbc2.Select_Today_Year());
 				mav3.addObject("month", jdbc2.Select_Today_Month());
 				mav3.addObject("day", jdbc2.Select_Today_Day());
-				mav3.addObject("todo_incompleted" , jdbc4.Make_ToDo_Incompleted_List());
+				mav3.addObject("todo_incompleted_CEO" , jdbc4.Make_ToDo_Incompleted_List_CEO());
+				mav3.addObject("todo_completed_CEO" , jdbc4.Make_ToDo_Complete());
 				
 				jdbc.set_User_Online(User_Num);
 				jdbc.Insert_Login_Track(User_Num, time_pr);

@@ -43,7 +43,7 @@ public class ToDo_Controller {
 		System.out.println("TODO 등록 완료\n");
 		
 		RedirectView rv = new RedirectView();
-		rv.setUrl("JSP/Main_CEO.jsp#t2");
+		rv.setUrl("go_main.do");
 		
 		return rv;
 	}

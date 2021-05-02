@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import JDBC.Repository_CheckInOut;
 import JDBC.Repository_Login;
 import JDBC.Repository_Server;
+import JDBC.Repository_ToDo;
 import Pre_Settings.SessionListener;
 import Security.Bcrypt;
 
@@ -38,6 +39,9 @@ public class LoginController_UC1 {
 	
 	@Autowired
 	private Repository_CheckInOut jdbc3;
+	
+	@Autowired
+	private Repository_ToDo jdbc4;
 	
 	
 	@RequestMapping(value = {"/login" , "/index" , ""})
@@ -127,6 +131,7 @@ public class LoginController_UC1 {
 				mav3.addObject("year", jdbc2.Select_Today_Year());
 				mav3.addObject("month", jdbc2.Select_Today_Month());
 				mav3.addObject("day", jdbc2.Select_Today_Day());
+				mav3.addObject("todo_incompleted" , jdbc4.Make_ToDo_Incompleted_List());
 				
 				jdbc.set_User_Online(User_Num);
 				jdbc.Insert_Login_Track(User_Num, time_pr);

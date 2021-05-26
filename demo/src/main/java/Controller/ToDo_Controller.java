@@ -74,7 +74,7 @@ public class ToDo_Controller {
 		System.out.println("TODO 완료\n");
 		
 		RedirectView rv = new RedirectView();
-		rv.setUrl("go_main.do");
+		rv.setUrl("CheckIn.do");
 		
 		return rv;
 		

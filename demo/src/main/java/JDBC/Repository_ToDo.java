@@ -76,6 +76,14 @@ public class Repository_ToDo {
 		
 		jdbcTemplate.execute(sql2);
 		
+		String sql3 = "DELETE from todo_incomplete where Task_Number ='" + Task_Number + "'";
+		
+		jdbcTemplate.execute(sql3);
+		
+		String sql4 = "DELETE from todo_complete where Task_Number ='" + Task_Number + "'";
+		
+		jdbcTemplate.execute(sql3);
+		
 	}
 	
 	public void Complete_ToDo(String Task_Number) {

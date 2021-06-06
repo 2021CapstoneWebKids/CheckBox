@@ -8,16 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import Scheduler.CheckInOut_Scheduler;
+import Scheduler.Login_Scheduler;
+
 @Repository
 public class Repository_ToDo {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	SimpleDateFormat format1 = new SimpleDateFormat ("mmss");
+	@Autowired
+	Login_Scheduler ls;
+	
 	SimpleDateFormat format2 = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
 	Date time = new Date();
-	String time_pr1 = format1.format(time);
 	String time_pr2 = format2.format(time);
 	
 	public void Make_Todo(
@@ -31,17 +35,10 @@ public class Repository_ToDo {
 			String Alarm ,
 			String Context){
 		
+		String time_code = Integer.toString(ls.getLoginTime());
+		
 		String Task_Number = WorkPlace_Number + Assign_User_Number
-							+ time_pr1;
-		
-		
-		
-		String sql = "INSERT INTO todo_main values('"
-				+ Task_Number + "' , '"
-				+ WorkPlace_Number + "' , '"
-				+ Assign_User_Number + "')";
-		
-		jdbcTemplate.execute(sql);
+							+ time_code;
 		
 		String sql2 = "INSERT INTO todo_daily values('"
 				+ Task_Number + "' , '"
@@ -68,10 +65,6 @@ public class Repository_ToDo {
 	
 	public void Delete_ToDo(String Task_Number) {
 		
-		String sql = "DELETE from todo_main where Task_Number ='" + Task_Number + "'";
-		
-		jdbcTemplate.execute(sql);
-		
 		String sql2 = "DELETE from todo_daily where Task_Number ='" + Task_Number + "'";
 		
 		jdbcTemplate.execute(sql2);
@@ -82,7 +75,7 @@ public class Repository_ToDo {
 		
 		String sql4 = "DELETE from todo_complete where Task_Number ='" + Task_Number + "'";
 		
-		jdbcTemplate.execute(sql3);
+		jdbcTemplate.execute(sql4);
 		
 	}
 	
@@ -109,6 +102,30 @@ public class Repository_ToDo {
 	public List<String> Load_Todos_complete_Task_Numbers() {
 		
 		String sql = "SELECT Task_Number from todo_complete";
+		List<String> rs = jdbcTemplate.queryForList(sql, String.class);
+		return rs;
+		
+	}
+	
+	public List<String> Load_Todos_Assign_Time(String Task_Number) {
+		
+		String sql = "SELECT Assign_Time from todo_daily where Task_Number = '" + Task_Number +"'";
+		List<String> rs = jdbcTemplate.queryForList(sql, String.class);
+		return rs;
+		
+	}
+	
+	public List<String> Load_Task_Implementer_Number(String Task_Number) {
+		
+		String sql = "SELECT Load_Task_Implementer_Number from todo_daily where Task_Number = '" + Task_Number +"'";
+		List<String> rs = jdbcTemplate.queryForList(sql, String.class);
+		return rs;
+		
+	}
+	
+	public List<String> Load_Fix_Or_Flow(String Task_Number) {
+		
+		String sql = "SELECT Fix_Or_Flow from todo_daily where Task_Number = '" + Task_Number +"'";
 		List<String> rs = jdbcTemplate.queryForList(sql, String.class);
 		return rs;
 		
@@ -147,7 +164,11 @@ public class Repository_ToDo {
 					+ "   <input type=\"text\" class=\"incom\" name=\"tns\" id=\"tns\" value=\"" + TNs.get(i) + "\" readonly/>"
 					+ "   <input type=\"text\" class=\"incom\"  name=\"cons\" id=\"cons\" value=\"" + this.Load_Todo_Context(TNs.get(i)) + "\" readonly/>"
 					+ "   <button name=\"submit\" type=\"submit\"  onclick=\"javascript: form.action='Delete_Todo.do';\"> 삭제 </button>"
-					+ "   <button name=\"submit\" type=\"submit\"  onclick=\"javascript: form.action='Info_Todo.do';\"> 정보 </button>"
+					+ "   <details><summary>정보 </summary>" 
+					+ "업무 등록 시간 : " + this.Load_Todos_Assign_Time(TNs.get(i)) + "<br>"
+					+ "업무 발령자 유저번호 : " + this.Load_Task_Implementer_Number(TNs.get(i)) + "<br>"
+					+ "고정/유동업무 : " + this.Load_Fix_Or_Flow(TNs.get(i)) + "<br>"
+					+ "</details>"
 					+ "</form>";
 			
 		}

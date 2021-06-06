@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import JDBC.Repository_Login;
+import Scheduler.Login_Scheduler;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -23,6 +24,9 @@ public class SessionListener implements HttpSessionListener{
 
 	@Autowired
 	private Repository_Login jdbc;
+	
+	@Autowired
+	Login_Scheduler ls;
 	
 	private static final Map<String , HttpSession> sessions = new ConcurrentHashMap<>();
 	
@@ -91,6 +95,7 @@ public class SessionListener implements HttpSessionListener{
      */
     public void sessionDestroyed(HttpSessionEvent se) {
     	
+    	ls.stopScheduler();
     	
     	//UC1-1-REQ-2
     	User_Num = (String) se.getSession().getAttribute("User_Num");

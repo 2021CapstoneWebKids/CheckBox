@@ -18,6 +18,8 @@ import JDBC.Repository_Login;
 import JDBC.Repository_Server;
 import JDBC.Repository_ToDo;
 import Pre_Settings.SessionListener;
+import Scheduler.CheckInOut_Scheduler;
+import Scheduler.Login_Scheduler;
 import Security.Bcrypt;
 
 @Controller
@@ -42,6 +44,9 @@ public class LoginController_UC1 {
 	
 	@Autowired
 	private Repository_ToDo jdbc4;
+	
+	@Autowired
+	Login_Scheduler ls;
 	
 	
 	@RequestMapping(value = {"/login" , "/index" , ""})
@@ -115,6 +120,7 @@ public class LoginController_UC1 {
 				
 				session.setMaxInactiveInterval(30*60);
 		
+				ls.startScheduler(session.getAttribute("ID"));
 			
 				mav3.addObject("ID", ID);
 				mav3.addObject("year", jdbc2.Select_Today_Year());

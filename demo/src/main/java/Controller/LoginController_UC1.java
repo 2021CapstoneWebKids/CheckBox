@@ -106,6 +106,8 @@ public class LoginController_UC1 {
 				mav2.addObject("todo_incompleted_EMP" , jdbc4.Make_ToDo_Incompleted_List_EMP());
 				mav2.addObject("todo_completed_EMP" , jdbc4.Make_ToDo_Complete());
 				mav2.addObject("Attendance_days" , jdbc3.Select_AttendanceDay(User_Num, jdbc2.Select_Today_Month()));
+				mav2.addObject("WorkTime" , jdbc3.Load_WorkTime(User_Num));
+				mav2.addObject("Salary" , "<br>이번달 총 급여 : " + jdbc3.Caculate_Salary(User_Num) + "원 <br>");
 				
 				jdbc.set_User_Online(User_Num);
 				jdbc.Insert_Login_Track(User_Num, time_pr);
@@ -128,6 +130,8 @@ public class LoginController_UC1 {
 				mav3.addObject("day", jdbc2.Select_Today_Day());
 				mav3.addObject("todo_incompleted_CEO" , jdbc4.Make_ToDo_Incompleted_List_CEO());
 				mav3.addObject("todo_completed_CEO" , jdbc4.Make_ToDo_Complete());
+				mav3.addObject("Show_Employees" , jdbc4.Load_Employees());
+				mav3.addObject("Show_Salarys" , jdbc4.Load_Salarys());
 				
 				jdbc.set_User_Online(User_Num);
 				jdbc.Insert_Login_Track(User_Num, time_pr);

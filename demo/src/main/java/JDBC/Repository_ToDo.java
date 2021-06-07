@@ -1,6 +1,7 @@
 package JDBC;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class Repository_ToDo {
 	@Autowired
 	Login_Scheduler ls;
 	
+	@Autowired
+	private Repository_CheckInOut jdbc_chk;
+	
 	SimpleDateFormat format2 = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
 	Date time = new Date();
 	String time_pr2 = format2.format(time);
@@ -34,6 +38,15 @@ public class Repository_ToDo {
 			String Limit ,
 			String Alarm ,
 			String Context){
+		
+		switch(FixOrFlow){
+			
+		case "Fix" : Limit = "X";
+		
+		case "Flow" : Fix_Day = "X";
+		}
+		
+		
 		
 		String time_code = Integer.toString(ls.getLoginTime());
 		
@@ -115,9 +128,17 @@ public class Repository_ToDo {
 		
 	}
 	
+	public List<String> Load_Limit_Day(String Task_Number) {
+		
+		String sql = "SELECT Limit_Day from todo_daily where Task_Number = '" + Task_Number +"'";
+		List<String> rs = jdbcTemplate.queryForList(sql, String.class);
+		return rs;
+		
+	}
+	
 	public List<String> Load_Task_Implementer_Number(String Task_Number) {
 		
-		String sql = "SELECT Load_Task_Implementer_Number from todo_daily where Task_Number = '" + Task_Number +"'";
+		String sql = "SELECT Task_Implementer_Number from todo_daily where Task_Number = '" + Task_Number +"'";
 		List<String> rs = jdbcTemplate.queryForList(sql, String.class);
 		return rs;
 		
@@ -126,6 +147,22 @@ public class Repository_ToDo {
 	public List<String> Load_Fix_Or_Flow(String Task_Number) {
 		
 		String sql = "SELECT Fix_Or_Flow from todo_daily where Task_Number = '" + Task_Number +"'";
+		List<String> rs = jdbcTemplate.queryForList(sql, String.class);
+		return rs;
+		
+	}
+	
+	public List<String> Load_Fix_Day(String Task_Number) {
+		
+		String sql = "SELECT Fix_Day from todo_daily where Task_Number = '" + Task_Number +"'";
+		List<String> rs = jdbcTemplate.queryForList(sql, String.class);
+		return rs;
+		
+	}
+	
+	public List<String> Load_Task_Type(String Task_Number) {
+		
+		String sql = "SELECT Task_Type from todo_daily where Task_Number = '" + Task_Number +"'";
 		List<String> rs = jdbcTemplate.queryForList(sql, String.class);
 		return rs;
 		
@@ -146,6 +183,70 @@ public class Repository_ToDo {
 		return rs;
 	}
 	
+	public String Load_Employees(){
+		
+		String sql = "Select User_Name from users_name";
+		List<String> rs1 = jdbcTemplate.queryForList(sql , String.class);
+		
+		String sql2 = "Select User_Number from users_name";
+		List<String> rs2 = jdbcTemplate.queryForList(sql2 , String.class);
+		
+		String sql3 = "Select User_Permission from users_permission";
+		List<String> rs3 = jdbcTemplate.queryForList(sql3 , String.class);
+		
+		String sql4 = "Select User_Email from user_email";
+		List<String> rs4 = jdbcTemplate.queryForList(sql4 , String.class);
+		
+		String rsf = "";
+		
+		for(int i=0; i<rs1.size(); i++) {
+			
+			rsf += "   <details><summary>" + rs1.get(i) + " </summary>"
+					+ " User_Number : " + rs2.get(i) + "<br>"
+					+ " User_Permission : " + rs3.get(i) + "<br>"
+					+ " User_Email : " + rs4.get(i) + "<br>"
+					+ "</details>";
+		}
+		
+		return rsf;
+	}
+	
+	public String Load_Salarys(){
+		
+		String sql = "Select User_Name from users_name";
+		List<String> rs1 = jdbcTemplate.queryForList(sql , String.class);
+		
+		String sql2 = "Select User_Permission from users_permission";
+		List<String> rs2 = jdbcTemplate.queryForList(sql2 , String.class);
+		
+		String sql3 = "Select User_Number from users_name";
+		List<String> rs3 = jdbcTemplate.queryForList(sql3 , String.class);
+		
+		String rsf = "";
+		
+		for(int i=0; i<rs3.size(); i++) {
+			
+			if(rs2.get(i).equals("CEO")) {
+				continue;
+			}
+			
+			rsf += "   <details><summary>" + rs1.get(i) + " </summary>"
+					+ " 직책 : " + rs2.get(i) + "<br>"
+					+ " 이번달 급여 : " + jdbc_chk.Caculate_Salary(rs3.get(i)) + "원 <br>"
+					+ " 현재 시급 : " + jdbc_chk.Load_Wage(rs3.get(i)) + "원<br>"
+					+ "</details>";
+		}
+		
+		return rsf;
+	}
+	
+	public String Load_Recent_CheckinTime(Object User_Num) {
+		
+		String sql = "Select Checkin_Time from employee_checkintime where Checkin_Time = '" + User_Num + "'";
+		String rs = jdbcTemplate.queryForObject(sql, String.class);
+		
+		return rs;
+	}
 	
 	
 	public String Make_ToDo_Incompleted_List_CEO() {
@@ -168,6 +269,9 @@ public class Repository_ToDo {
 					+ "업무 등록 시간 : " + this.Load_Todos_Assign_Time(TNs.get(i)) + "<br>"
 					+ "업무 발령자 유저번호 : " + this.Load_Task_Implementer_Number(TNs.get(i)) + "<br>"
 					+ "고정/유동업무 : " + this.Load_Fix_Or_Flow(TNs.get(i)) + "<br>"
+					+ "고정업무 요일 : " + this.Load_Fix_Day(TNs.get(i)) + "<br>"
+					+ "유동업무 제한기간 : " + this.Load_Limit_Day(TNs.get(i)) + "<br>"
+					+ "업무 항목 : " + this.Load_Task_Type(TNs.get(i)) + "<br>"
 					+ "</details>"
 					+ "</form>";
 			

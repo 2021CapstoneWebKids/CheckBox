@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>CEO용 메인 페이지</title>
 
+
+
 <style>
 	* {
   transition: all 500ms ease-out;
@@ -301,6 +303,9 @@ for (j = 0; j < check_Box.length; j++) {
 		    	${ID}님 으로 사용중 | 권한 : CEO , Manager
 		    </span>
 	    </div>
+	 
+	 
+	    
      
   	</div>
   	
@@ -411,7 +416,23 @@ for (j = 0; j < check_Box.length; j++) {
   
   
   <div class="page" id="p3">
-    <li class="icon fa fa-coffee"><span class="title">Coffee</span></li>
+   	<div class="Calender">
+   		<div>
+    	
+		    <h2 style="color:yellow">Others</h2>
+		    <hr>
+		    <a href="todo_cal.do"><h3 style="color:red">캘린더형 ToDo편집 </h3></a>
+		    <hr>
+		    <h3 style="color:green">직원목록</h3>
+		    ${Show_Employees}
+		    <hr>
+		    <h3 style="color:skyblue">인건비 관리</h3>
+		    ${Show_Salarys}
+		    
+		</div>
+   	
+   	
+   	</div>
   </div>
   
   

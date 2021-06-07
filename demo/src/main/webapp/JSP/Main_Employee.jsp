@@ -510,7 +510,12 @@ a {
   
   
   <div class="page" id="p2">
-    <li class="icon fa fa-keyboard-o"><span class="title">Type</span></li>
+  
+  	<div class="Calender">
+  			${WorkTime}
+  			
+  			${Salary}
+  	</div>
   </div>  
   
   

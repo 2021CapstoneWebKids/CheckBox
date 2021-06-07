@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import JDBC.Repository_Modify_Info;
@@ -89,6 +90,19 @@ public class ToDo_Controller {
 		rv.setUrl("go_main.do");
 		
 		return rv;
+		
+	}
+	
+	@RequestMapping(value = "todo_cal.do")
+	public ModelAndView ToDo_Cal(HttpSession session , HttpServletRequest req) {
+		 
+		ModelAndView mav = new ModelAndView("JSP/TodoCal.jsp");
+		
+		String User_Num = (String) session.getAttribute("User_Num");
+		
+		
+		
+		return mav;
 		
 	}
 	
